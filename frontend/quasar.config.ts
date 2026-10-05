@@ -1,35 +1,13 @@
-// Configuration for your app
-// https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
-
 import { defineConfig } from "#q-app";
 
 export default defineConfig(ctx => {
   return {
-    // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
-    // preFetch: true,
-
-    // app boot file (/src/boot)
-    // --> boot files are part of "main.js"
-    // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: ["i18n"],
 
-    // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ["app.scss"],
 
-    // https://github.com/quasarframework/quasar/tree/dev/extras
-    extras: [
-      // 'ionicons-v4',
-      // 'mdi-v7',
-      // 'fontawesome-v7',
-      // 'eva-icons',
-      // 'themify',
-      // 'line-awesome',
+    extras: ["roboto-font", "material-icons", "mdi-v7"],
 
-      "roboto-font", // optional, you are not bound to it
-      "material-icons" // optional, you are not bound to it
-    ],
-
-    // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
       target: {
         // browser: 'baseline-widely-available',
@@ -42,10 +20,7 @@ export default defineConfig(ctx => {
         // extendTsConfig (tsConfig) {}
       },
 
-      // https://v2.quasar.dev/quasar-cli-vite/page-routing-with-vue-router#filename-based-routing
-      // filenameBasedRouting: true,
-
-      vueRouterMode: "hash", // available values: 'hash', 'history'
+      vueRouterMode: "hash",
       // vueRouterBase,
 
       // publicPath: '/',
@@ -58,53 +33,35 @@ export default defineConfig(ctx => {
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
 
-      // to write components with JSX/TSX:
-      // https://v2.quasar.dev/quasar-cli-vite/handling-vite#jsx-tsx
       // vueJsx: true,
 
       vitePlugins: [
         [
           "@intlify/unplugin-vue-i18n/vite",
           {
-            // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
-            // compositionOnly: false,
-
-            // if you want to use named tokens in your Vue I18n messages, such as 'Hello {name}',
-            // you need to set `runtimeOnly: false`
-            // runtimeOnly: false,
-
             ssr: ctx.mode.ssr || ctx.mode.ssg,
-
-            // you need to set i18n resource including paths !
             include: [ctx.appPaths.resolve.app("src/i18n")]
           }
         ]
       ]
     },
 
-    // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
-      // vueDevtools: true,
-      // https: true,
-      open: true // opens browser window automatically
+      open: false,
+      proxy: {
+        "/api": {
+          target: "http://localhost:8080",
+          changeOrigin: true
+        }
+      }
     },
 
-    // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
-
-      // iconSet: 'material-icons', // Quasar icon set
-      // lang: 'en-US', // Quasar language pack
-
-      // For special cases outside of where the auto-import strategy can have an impact
-      // (like functional components as one of the examples),
-      // you can manually specify Quasar components/directives to be available everywhere:
-      //
-      // components: [],
-      // directives: [],
-
-      // Quasar plugins
-      plugins: []
+      config: {
+        dark: "auto",
+        notify: { position: "top", timeout: 2500 }
+      },
+      plugins: ["Dark", "LocalStorage", "Notify"]
     },
 
     // animations: 'all', // --- includes all animations

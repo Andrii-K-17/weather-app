@@ -1,10 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="column items-center">
-      <img
-        alt="Quasar logo"
-        style="width: 200px; height: 200px"
-      />
+      <img alt="Quasar logo" style="width: 200px; height: 200px" />
 
       <q-btn
         class="q-mt-md"
