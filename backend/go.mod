@@ -1,3 +1,3 @@
-module github.com/Andrii-K-17/weather-app/backend
+module weatherapp
 
 go 1.27.1
