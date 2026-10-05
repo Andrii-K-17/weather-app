@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.quasar/
+coverage/
+backend/bin/
+
+.env
+.env.*
+!.env.example
+
+.vscode/*
+!.vscode/extensions.json
+*.log
