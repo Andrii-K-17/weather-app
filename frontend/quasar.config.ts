@@ -1,8 +1,8 @@
 import { defineConfig } from "#q-app";
 
-export default defineConfig(ctx => {
+export default defineConfig((ctx) => {
   return {
-    boot: ["i18n"],
+    boot: ["i18n", "theme"],
 
     css: ["app.scss"],
 
@@ -16,7 +16,7 @@ export default defineConfig(ctx => {
 
       typescript: {
         strict: true,
-        vueShim: true
+        vueShim: true,
         // extendTsConfig (tsConfig) {}
       },
 
@@ -40,10 +40,10 @@ export default defineConfig(ctx => {
           "@intlify/unplugin-vue-i18n/vite",
           {
             ssr: ctx.mode.ssr || ctx.mode.ssg,
-            include: [ctx.appPaths.resolve.app("src/i18n")]
-          }
-        ]
-      ]
+            include: [ctx.appPaths.resolve.app("src/i18n")],
+          },
+        ],
+      ],
     },
 
     devServer: {
@@ -51,17 +51,17 @@ export default defineConfig(ctx => {
       proxy: {
         "/api": {
           target: "http://localhost:8080",
-          changeOrigin: true
-        }
-      }
+          changeOrigin: true,
+        },
+      },
     },
 
     framework: {
       config: {
         dark: "auto",
-        notify: { position: "top", timeout: 2500 }
+        notify: { position: "top", timeout: 2500 },
       },
-      plugins: ["Dark", "LocalStorage", "Notify"]
+      plugins: ["Dark", "LocalStorage", "Notify"],
     },
 
     // animations: 'all', // --- includes all animations
@@ -89,8 +89,8 @@ export default defineConfig(ctx => {
        */
       prodPort: 3000,
       middlewares: [
-        "render" // keep this as last one
-      ]
+        "render", // keep this as last one
+      ],
 
       // clientSideRenderingRoutes: [],
       // noPreloadTagRoutes: [],
@@ -135,7 +135,7 @@ export default defineConfig(ctx => {
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
     pwa: {
-      workboxMode: "GenerateSW" // 'GenerateSW' or 'InjectManifest'
+      workboxMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
       // swFilename: 'sw.js',
       // manifestFilename: 'manifest.json',
       // extendPWAManifestJson (json) {},
@@ -152,7 +152,7 @@ export default defineConfig(ctx => {
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-capacitor-apps/configuring-capacitor
     capacitor: {
-      hideSplashscreen: true
+      hideSplashscreen: true,
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-electron-apps/configuring-electron
@@ -183,8 +183,8 @@ export default defineConfig(ctx => {
       builder: {
         // https://www.electron.build/configuration
 
-        appId: "frontend"
-      }
+        appId: "frontend",
+      },
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
@@ -200,7 +200,7 @@ export default defineConfig(ctx => {
        *
        * @example [ 'my-script.ts', 'sub-folder/my-other-script.js' ]
        */
-      extraScripts: []
-    }
+      extraScripts: [],
+    },
   };
 });
