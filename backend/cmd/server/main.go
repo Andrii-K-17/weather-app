@@ -36,9 +36,10 @@ func run() error {
 	defer stop()
 
 	owmClient := owm.NewClient(cfg.OWMAPIKey)
-	handler := httpapi.New(httpapi.Deps{
-		Weather: weather.NewService(owmClient),
-		Logger:  logger,
+	handler := httpapi.New(ctx, httpapi.Deps{
+		Weather:        weather.NewService(owmClient),
+		Logger:         logger,
+		AllowedOrigins: cfg.AllowedOrigins,
 	})
 
 	srv := &http.Server{
