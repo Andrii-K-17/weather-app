@@ -11,6 +11,9 @@ import (
 	"time"
 
 	"weatherapp/internal/config"
+	"weatherapp/internal/httpapi"
+	"weatherapp/internal/owm"
+	"weatherapp/internal/weather"
 )
 
 func main() {
@@ -32,15 +35,15 @@ func run() error {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(`{"status":"ok"}`))
+	owmClient := owm.NewClient(cfg.OWMAPIKey)
+	handler := httpapi.New(httpapi.Deps{
+		Weather: weather.NewService(owmClient),
+		Logger:  logger,
 	})
 
 	srv := &http.Server{
 		Addr:              ":" + cfg.Port,
-		Handler:           mux,
+		Handler:           handler,
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       10 * time.Second,
 		WriteTimeout:      20 * time.Second,
