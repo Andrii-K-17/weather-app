@@ -36,7 +36,7 @@ onMounted(() => {
 
       <div v-else-if="!overview" class="state wx-card">
         <q-icon name="mdi-cloud-off-outline" size="40px" class="wx-muted" />
-        <p class="state__text">{{ errorMessage(errorCode) }}</p>
+        <p class="state-message">{{ errorMessage(errorCode) }}</p>
         <q-btn
           flat
           rounded
@@ -64,7 +64,7 @@ onMounted(() => {
   text-align: center;
 }
 
-.state__text {
+.state-message {
   margin: 0;
   color: var(--text-muted);
 }

@@ -7,8 +7,7 @@ const weather = useWeatherStore();
 <template>
   <q-layout
     view="hHh lpR fFf"
-    class="app-sky"
-    :class="`scene--${weather.scene}`"
+    :class="['app-sky', 'scene', `scene-${weather.scene}`]"
   >
     <q-page-container>
       <router-view />

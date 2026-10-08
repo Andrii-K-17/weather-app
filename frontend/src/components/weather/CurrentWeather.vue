@@ -15,31 +15,33 @@ const current = computed(() => props.overview.current);
 </script>
 
 <template>
-  <section class="current">
-    <h1 class="current__city">{{ cityName }}</h1>
+  <section class="current-weather">
+    <h1 class="city-name">{{ cityName }}</h1>
 
-    <div class="current__temp wx-temp">
-      {{ roundTemp(current.temp) }}<span class="current__deg">°</span>
+    <div class="temperature wx-temp">
+      {{ roundTemp(current.temp) }}<span class="temperature-degree">°</span>
     </div>
 
-    <div class="current__cond">
+    <div class="condition">
       <WeatherIcon :condition="current.condition" size="26px" />
-      <span class="current__desc">{{ current.condition.description }}</span>
+      <span class="condition-description">{{
+        current.condition.description
+      }}</span>
     </div>
 
-    <div class="current__range wx-muted">
+    <div class="range wx-muted">
       {{ t("weather.high") }} {{ roundTemp(current.tempMax) }}° ·
       {{ t("weather.low") }} {{ roundTemp(current.tempMin) }}°
     </div>
 
-    <div class="current__updated">
+    <div class="updated-at">
       {{ t("home.updatedAt", { time: fmt.updatedAt(overview.fetchedAt) }) }}
     </div>
   </section>
 </template>
 
 <style scoped lang="scss">
-.current {
+.current-weather {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,19 +49,19 @@ const current = computed(() => props.overview.current);
   text-align: center;
 }
 
-.current__city {
+.city-name {
   margin: 0;
   font-size: 22px;
   font-weight: 400;
 }
 
-.current__temp {
+.temperature {
   position: relative;
   display: inline-block;
   margin: 8px 0 4px;
 }
 
-.current__deg {
+.temperature-degree {
   position: absolute;
   top: 0.06em;
   left: 100%;
@@ -67,23 +69,23 @@ const current = computed(() => props.overview.current);
   font-weight: 300;
 }
 
-.current__cond {
+.condition {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 18px;
 }
 
-.current__desc::first-letter {
+.condition-description::first-letter {
   text-transform: uppercase;
 }
 
-.current__range {
+.range {
   margin-top: 6px;
   font-size: 15px;
 }
 
-.current__updated {
+.updated-at {
   margin-top: 14px;
   font-size: 12px;
   color: var(--text-faint);

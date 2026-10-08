@@ -17,7 +17,7 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 <template>
   <header class="topbar">
-    <div class="topbar__title">{{ t("app.name") }}</div>
+    <div class="app-title">{{ t("app.name") }}</div>
     <q-btn
       flat
       round
@@ -38,7 +38,7 @@ const themeIcon = computed(() => ICONS[settings.theme]);
   padding: 12px 4px 4px;
 }
 
-.topbar__title {
+.app-title {
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.02em;
