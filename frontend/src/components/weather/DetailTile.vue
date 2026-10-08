@@ -20,7 +20,10 @@ defineProps<{
     </div>
 
     <div v-if="meter !== undefined" class="detail-tile-meter">
-      <span class="detail-tile-meter-fill" :style="{ width: `${Math.min(Math.max(meter, 0), 100)}%` }" />
+      <span
+        class="detail-tile-meter-fill"
+        :style="{ width: `${Math.min(Math.max(meter, 0), 100)}%` }"
+      />
     </div>
   </div>
 </template>

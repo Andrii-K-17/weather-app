@@ -8,6 +8,7 @@ import { useErrorMessage } from "@/composables/useErrorMessage";
 import { useWeatherStore } from "@/stores/weather";
 import CurrentWeather from "@/components/weather/CurrentWeather.vue";
 import DetailsGrid from "@/components/weather/DetailsGrid.vue";
+import HourlyStrip from "@/components/weather/HourlyStrip.vue";
 
 const { t } = useI18n();
 const errorMessage = useErrorMessage();
@@ -49,6 +50,8 @@ onMounted(() => {
       <CurrentWeather v-else :overview="overview" :city-name="cityName" />
 
       <DetailsGrid v-if="overview" :current="overview.current" />
+
+      <HourlyStrip v-if="overview" :overview="overview" />
     </div>
   </q-page>
 </template>
