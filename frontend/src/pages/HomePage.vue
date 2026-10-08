@@ -7,6 +7,7 @@ import HomeSkeleton from "@/components/weather/HomeSkeleton.vue";
 import { useErrorMessage } from "@/composables/useErrorMessage";
 import { useWeatherStore } from "@/stores/weather";
 import { roundTemp } from "@/utils/format";
+import CurrentWeather from "@/components/weather/CurrentWeather.vue";
 
 const { t } = useI18n();
 const errorMessage = useErrorMessage();
@@ -45,41 +46,12 @@ onMounted(() => {
         />
       </div>
 
-      <section v-else class="hero">
-        <div class="hero__city">{{ cityName }}</div>
-        <div class="wx-temp">{{ roundTemp(overview.current.temp) }}°</div>
-        <div class="hero__desc">
-          {{ overview.current.condition.description }}
-        </div>
-        <div class="wx-muted">
-          {{ t("weather.high") }} {{ roundTemp(overview.current.tempMax) }}° ·
-          {{ t("weather.low") }} {{ roundTemp(overview.current.tempMin) }}°
-        </div>
-      </section>
+      <CurrentWeather v-else :overview="overview" :city-name="cityName" />
     </div>
   </q-page>
 </template>
 
 <style scoped lang="scss">
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px 0 28px;
-  text-align: center;
-}
-
-.hero__city {
-  font-size: 22px;
-  font-weight: 400;
-}
-
-.hero__desc {
-  margin: 4px 0;
-  font-size: 18px;
-  text-transform: capitalize;
-}
-
 .state {
   display: flex;
   flex-direction: column;
