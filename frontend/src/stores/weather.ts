@@ -4,6 +4,7 @@ import { ApiError } from "@/api/client";
 import { weatherApi } from "@/api/weather";
 import type { ApiErrorCode, WeatherOverview } from "@/api/types";
 import { useSettingsStore } from "@/stores/settings";
+import { getWeatherVisual, type Scene } from "@/utils/weatherVisual";
 
 export interface WeatherTarget {
   lat: number;
@@ -28,6 +29,7 @@ export const useWeatherStore = defineStore("weather", () => {
   const status = ref<WeatherStatus>("idle");
   const errorCode = ref<ApiErrorCode | null>(null);
   const target = ref<WeatherTarget | null>(null);
+  const scene = ref<Scene>("clear");
 
   let controller: AbortController | null = null;
 
@@ -64,6 +66,10 @@ export const useWeatherStore = defineStore("weather", () => {
       );
       if (signal.aborted) return;
       overview.value = data;
+      scene.value = getWeatherVisual(
+        data.current.condition.id,
+        data.current.isDay,
+      ).scene;
       status.value = "success";
     } catch (e) {
       if (signal.aborted) return;
@@ -85,6 +91,7 @@ export const useWeatherStore = defineStore("weather", () => {
     errorCode,
     target,
     cityName,
+    scene,
     load,
     refresh,
   };
