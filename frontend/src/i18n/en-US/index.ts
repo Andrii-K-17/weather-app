@@ -28,6 +28,12 @@ export default {
     hourly: "Hourly",
     daily: "5-day forecast",
   },
+  units: {
+    kmh: "km/h",
+    hpa: "hPa",
+    km: "km",
+    m: "m",
+  },
   errors: {
     not_found: "We couldn’t find that place.",
     network: "No connection. Check your internet and try again.",

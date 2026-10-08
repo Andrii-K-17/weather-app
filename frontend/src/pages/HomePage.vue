@@ -6,8 +6,8 @@ import AppTopBar from "@/components/AppTopBar.vue";
 import HomeSkeleton from "@/components/weather/HomeSkeleton.vue";
 import { useErrorMessage } from "@/composables/useErrorMessage";
 import { useWeatherStore } from "@/stores/weather";
-import { roundTemp } from "@/utils/format";
 import CurrentWeather from "@/components/weather/CurrentWeather.vue";
+import DetailsGrid from "@/components/weather/DetailsGrid.vue";
 
 const { t } = useI18n();
 const errorMessage = useErrorMessage();
@@ -47,6 +47,8 @@ onMounted(() => {
       </div>
 
       <CurrentWeather v-else :overview="overview" :city-name="cityName" />
+
+      <DetailsGrid v-if="overview" :current="overview.current" />
     </div>
   </q-page>
 </template>
