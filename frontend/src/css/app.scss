@@ -1,1 +1,193 @@
-// app global css
+@use "sass:list";
+
+$scenes-light: (
+  clear: (
+    #d9eafb,
+    #f6faff,
+  ),
+  night: (
+    #d7ddf2,
+    #eef0fa,
+  ),
+  clouds: (
+    #e3e9f1,
+    #f6f8fb,
+  ),
+  rain: (
+    #d6e0eb,
+    #eef2f7,
+  ),
+  storm: (
+    #dcd9ea,
+    #f1f0f7,
+  ),
+  snow: (
+    #e7f0f8,
+    #f9fcfe,
+  ),
+  mist: (
+    #e7e9eb,
+    #f6f6f5,
+  ),
+);
+
+$scenes-dark: (
+  clear: (
+    #1f2f45,
+    #141b27,
+  ),
+  night: (
+    #1b2036,
+    #11141f,
+  ),
+  clouds: (
+    #252d38,
+    #151a21,
+  ),
+  rain: (
+    #1f2b38,
+    #131920,
+  ),
+  storm: (
+    #26233a,
+    #15141f,
+  ),
+  snow: (
+    #27323d,
+    #161b21,
+  ),
+  mist: (
+    #2a2d31,
+    #17181a,
+  ),
+);
+
+@property --sky-top {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d9eafb;
+}
+@property --sky-bottom {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f6faff;
+}
+
+:root {
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 12px;
+}
+
+body.body--light {
+  --text: #1f2a37;
+  --text-muted: #6b7a8c;
+  --text-faint: #9aa6b4;
+  --surface: rgba(255, 255, 255, 0.6);
+  --surface-border: rgba(255, 255, 255, 0.75);
+  --divider: rgba(31, 42, 55, 0.08);
+  --shadow: 0 1px 2px rgba(31, 42, 55, 0.05), 0 8px 24px rgba(31, 42, 55, 0.05);
+  --bar-track: rgba(31, 42, 55, 0.07);
+  --bar-from: #8ec5fc;
+  --bar-to: #f6c28b;
+  --sky-top: #d9eafb;
+  --sky-bottom: #f6faff;
+  --tone-sun: #f5c25a;
+  --tone-moon: #9aa8d6;
+  --tone-cloud: #9fb0c6;
+  --tone-rain: #7aa5d6;
+  --tone-storm: #9b8fd0;
+  --tone-snow: #8fc1e0;
+  --tone-mist: #a9b4bd;
+  background: #f6faff;
+}
+
+body.body--dark {
+  --text: #e8edf3;
+  --text-muted: #9aa7b6;
+  --text-faint: #6f7c8b;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.07);
+  --divider: rgba(255, 255, 255, 0.08);
+  --shadow: none;
+  --bar-track: rgba(255, 255, 255, 0.1);
+  --bar-from: #6fa8dc;
+  --bar-to: #d9a46c;
+  --sky-top: #1f2f45;
+  --sky-bottom: #141b27;
+  --tone-sun: #f2c15d;
+  --tone-moon: #b3bfe8;
+  --tone-cloud: #8ea0b8;
+  --tone-rain: #78a6dc;
+  --tone-storm: #a99be0;
+  --tone-snow: #9cccea;
+  --tone-mist: #98a4af;
+  background: #141b27;
+}
+
+@each $name, $pair in $scenes-light {
+  body.body--light .scene--#{"" + $name} {
+    --sky-top: #{list.nth($pair, 1)};
+    --sky-bottom: #{list.nth($pair, 2)};
+  }
+}
+
+@each $name, $pair in $scenes-dark {
+  body.body--dark .scene--#{"" + $name} {
+    --sky-top: #{list.nth($pair, 1)};
+    --sky-bottom: #{list.nth($pair, 2)};
+  }
+}
+
+body {
+  color: var(--text);
+  font-family: "Outfit", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-sky {
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom));
+  transition:
+    --sky-top 0.8s ease,
+    --sky-bottom 0.8s ease;
+}
+
+.wx-container {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 8px 16px 48px;
+}
+
+.wx-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px) saturate(1.1);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+}
+
+.wx-muted {
+  color: var(--text-muted);
+}
+
+.wx-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.wx-temp {
+  font-size: clamp(88px, 28vw, 120px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.wx-icon-btn {
+  color: var(--text-muted);
+}
