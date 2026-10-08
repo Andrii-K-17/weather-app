@@ -126,14 +126,14 @@ body.body--dark {
 }
 
 @each $name, $pair in $scenes-light {
-  body.body--light .scene--#{"" + $name} {
+  body.body--light .scene-#{"" + $name} {
     --sky-top: #{list.nth($pair, 1)};
     --sky-bottom: #{list.nth($pair, 2)};
   }
 }
 
 @each $name, $pair in $scenes-dark {
-  body.body--dark .scene--#{"" + $name} {
+  body.body--dark .scene-#{"" + $name} {
     --sky-top: #{list.nth($pair, 1)};
     --sky-bottom: #{list.nth($pair, 2)};
   }
