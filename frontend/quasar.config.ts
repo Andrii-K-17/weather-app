@@ -2,7 +2,7 @@ import { defineConfig } from "#q-app";
 
 export default defineConfig((ctx) => {
   return {
-    boot: ["i18n", "theme"],
+    boot: ["i18n", "pinia"],
 
     css: ["app.scss"],
 
