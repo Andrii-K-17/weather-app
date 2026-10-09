@@ -29,7 +29,7 @@ export function formatHourLocal(
 /** Short weekday for a local date string (YYYY-MM-DD). */
 export function formatWeekday(isoDate: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, {
-    weekday: "short",
+    weekday: "long",
     timeZone: "UTC",
   }).format(new Date(`${isoDate}T12:00:00Z`));
 }
