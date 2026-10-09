@@ -14,6 +14,7 @@ import { useErrorMessage } from "@/composables/useErrorMessage";
 import { useWeatherStore } from "@/stores/weather";
 import type { Place } from "@/api/types";
 import CitySearchDialog from "@/components/CitySearchDialog.vue";
+import ErrorCard from "@/components/weather/ErrorCard.vue";
 
 const $q = useQuasar();
 const { t } = useI18n();
@@ -72,16 +73,13 @@ async function onRefresh(done: () => void) {
 
         <HomeSkeleton v-if="showSkeleton" />
 
-        <div v-else-if="!overview" class="state wx-card" role="alert">
-          <q-icon name="mdi-cloud-off-outline" size="40px" class="wx-muted" />
-          <p class="state-message">{{ errorMessage(errorCode) }}</p>
-          <q-btn
-            flat
-            rounded
-            :label="t('common.retry')"
-            @click="weather.refresh()"
-          />
-        </div>
+        <ErrorCard
+          v-else-if="!overview"
+          :code="errorCode"
+          :retrying="status === 'loading'"
+          @retry="weather.refresh()"
+          @search="searchOpen = true"
+        />
 
         <div v-else class="stack">
           <CurrentWeather :overview="overview" :city-name="cityName" />

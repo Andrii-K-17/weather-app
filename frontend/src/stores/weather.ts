@@ -47,6 +47,8 @@ export const useWeatherStore = defineStore("weather", () => {
     controller = new AbortController();
     const { signal } = controller;
 
+    const previous = { overview: overview.value, target: target.value };
+
     target.value = next;
     errorCode.value = null;
 
@@ -74,6 +76,10 @@ export const useWeatherStore = defineStore("weather", () => {
     } catch (e) {
       if (signal.aborted) return;
       errorCode.value = e instanceof ApiError ? e.code : "unknown";
+      if (!overview.value && previous.overview) {
+        overview.value = previous.overview;
+        target.value = previous.target;
+      }
       status.value = "error";
     }
   }

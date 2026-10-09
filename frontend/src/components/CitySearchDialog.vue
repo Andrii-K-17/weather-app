@@ -4,6 +4,7 @@ import type { Place } from "@/api/types";
 import { useCitySearch } from "@/composables/useCitySearch";
 import { useErrorMessage } from "@/composables/useErrorMessage";
 import { placeLabel } from "@/utils/place";
+import InlineNotice from "@/components/InlineNotice.vue";
 
 const open = defineModel<boolean>({ required: true });
 const emit = defineEmits<{ pick: [place: Place]; locate: [] }>();
@@ -95,21 +96,20 @@ function onLocate() {
           </li>
         </ul>
 
-        <p v-else-if="status === 'done'" class="sheet-msg">
-          {{ t("search.noResults", { query: query.trim() }) }}
-        </p>
+        <InlineNotice
+          v-else-if="status === 'done'"
+          icon="mdi-map-search-outline"
+          :text="t('search.noResults', { query: (query ?? '').trim() })"
+          :hint="t('search.noResultsHint')"
+        />
 
-        <p v-else class="sheet-msg">
-          {{ errorMessage(errorCode) }}
-          <q-btn
-            flat
-            dense
-            no-caps
-            rounded
-            :label="t('common.retry')"
-            @click="retry()"
-          />
-        </p>
+        <InlineNotice
+          v-else
+          icon="mdi-alert-circle-outline"
+          :text="errorMessage(errorCode)"
+          :action-label="t('common.retry')"
+          @action="retry()"
+        />
       </div>
     </div>
   </q-dialog>
@@ -127,8 +127,6 @@ function onLocate() {
   background: var(--sheet);
   box-shadow: var(--shadow);
   color: var(--text);
-  backdrop-filter: blur(18px) saturate(1.1);
-  -webkit-backdrop-filter: blur(18px) saturate(1.1);
 }
 
 .bar {
@@ -161,13 +159,6 @@ function onLocate() {
   flex-direction: column;
   gap: 8px;
   padding: 8px 20px;
-}
-
-.sheet-msg {
-  margin: 0;
-  padding: 24px 20px;
-  color: var(--text-muted);
-  text-align: center;
 }
 
 .place {

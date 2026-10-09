@@ -12,7 +12,7 @@ const MIN_QUERY_LENGTH = 2;
 export function useCitySearch() {
   const settings = useSettingsStore();
 
-  const query = ref("");
+  const query = ref<string | null>("");
   const results = ref<Place[]>([]);
   const status = ref<SearchStatus>("idle");
   const errorCode = ref<ApiErrorCode | null>(null);
@@ -22,7 +22,7 @@ export function useCitySearch() {
   async function run() {
     controller?.abort();
 
-    const q = query.value.trim();
+    const q = (query.value ?? "").trim();
     if (q.length < MIN_QUERY_LENGTH) {
       results.value = [];
       errorCode.value = null;
