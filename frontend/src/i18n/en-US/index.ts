@@ -5,11 +5,23 @@ export default {
   common: {
     retry: "Try again",
     refresh: "Refresh",
+    cancel: "Cancel",
   },
   theme: {
     system: "System theme",
     light: "Light theme",
     dark: "Dark theme",
+  },
+  search: {
+    placeholder: "Search city",
+    useLocation: "Use my location",
+    noResults: "No cities found for “{query}”",
+    noResultsHint: "Check the spelling or try another name.",
+  },
+  location: {
+    use: "Use my location",
+    current: "Current location",
+    fallback: "Showing {city}. Search for a city or turn on location access.",
   },
   home: {
     updatedAt: "Updated {time}",
@@ -44,5 +56,10 @@ export default {
     invalid_request: "Something is wrong with the request.",
     internal: "Something went wrong on our side.",
     unknown: "Something went wrong. Please try again.",
+    geo_denied:
+      "Location access is off. Allow it in your browser to see local weather.",
+    geo_unavailable: "We couldn’t determine your location.",
+    geo_timeout: "Locating you took too long.",
+    geo_unsupported: "Location isn’t supported on this device.",
   },
 };

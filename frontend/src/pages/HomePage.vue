@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from "vue";
+import { computed, onMounted, watch, ref } from "vue";
 import { useQuasar } from "quasar";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
@@ -12,6 +12,8 @@ import HourlyStrip from "@/components/weather/HourlyStrip.vue";
 import { useAutoRefresh } from "@/composables/useAutoRefresh";
 import { useErrorMessage } from "@/composables/useErrorMessage";
 import { useWeatherStore } from "@/stores/weather";
+import type { Place } from "@/api/types";
+import CitySearchDialog from "@/components/CitySearchDialog.vue";
 
 const $q = useQuasar();
 const { t } = useI18n();
@@ -26,6 +28,12 @@ const DEFAULT_CITY = { name: "Kyiv", lat: 50.45, lon: 30.52 };
 const showSkeleton = computed(
   () => !overview.value && status.value !== "error",
 );
+
+const searchOpen = ref(false);
+
+function onPick(place: Place) {
+  void weather.load({ lat: place.lat, lon: place.lon, name: place.name });
+}
 
 onMounted(() => {
   if (!weather.overview) void weather.load(DEFAULT_CITY);
@@ -60,7 +68,7 @@ async function onRefresh(done: () => void) {
   <q-page>
     <q-pull-to-refresh no-mouse @refresh="onRefresh">
       <div class="wx-container">
-        <AppTopBar />
+        <AppTopBar @search="searchOpen = true" />
 
         <HomeSkeleton v-if="showSkeleton" />
 
@@ -83,6 +91,8 @@ async function onRefresh(done: () => void) {
         </div>
       </div>
     </q-pull-to-refresh>
+
+    <CitySearchDialog v-model="searchOpen" @pick="onPick" />
   </q-page>
 </template>
 

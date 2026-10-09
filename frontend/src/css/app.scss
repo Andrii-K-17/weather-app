@@ -85,6 +85,7 @@ body.body--light {
   --text-faint: #69707a;
   --surface: rgba(255, 255, 255, 0.6);
   --surface-border: rgba(255, 255, 255, 0.75);
+  --sheet: rgba(255, 255, 255, 0.78);
   --divider: rgba(31, 42, 55, 0.3);
   --shadow: 0 1px 2px rgba(31, 42, 55, 0.05), 0 8px 24px rgba(31, 42, 55, 0.05);
   --bar-track: rgba(31, 42, 55, 0.07);
@@ -108,6 +109,7 @@ body.body--dark {
   --text-faint: #8c9cae;
   --surface: rgba(255, 255, 255, 0.05);
   --surface-border: rgba(255, 255, 255, 0.07);
+  --sheet: rgba(19, 25, 32, 0.75);
   --divider: rgba(255, 255, 255, 0.3);
   --shadow: none;
   --bar-track: rgba(255, 255, 255, 0.1);
@@ -190,4 +192,9 @@ body {
 
 .wx-icon-btn {
   color: var(--text-muted);
+}
+
+.q-dialog-backdrop {
+  background: rgba(31, 42, 55, 0.3);
+  backdrop-filter: blur(6px);
 }

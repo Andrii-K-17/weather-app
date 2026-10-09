@@ -4,6 +4,8 @@ import { useI18n } from "vue-i18n";
 import { useSettingsStore } from "@/stores/settings";
 import { useWeatherStore } from "@/stores/weather";
 
+const emit = defineEmits<{ search: [] }>();
+
 const { t } = useI18n();
 const settings = useSettingsStore();
 const weather = useWeatherStore();
@@ -19,29 +21,33 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 <template>
   <header class="topbar">
-    <div class="app-title">{{ t("app.name") }}</div>
-    <div class="topbar-actions">
-      <q-btn
-        flat
-        round
-        dense
-        class="wx-icon-btn"
-        icon="mdi-refresh"
-        :loading="weather.status === 'refreshing'"
-        :disable="!weather.target"
-        :aria-label="t('common.refresh')"
-        @click="weather.refresh()"
-      />
-      <q-btn
-        flat
-        round
-        dense
-        class="wx-icon-btn"
-        :icon="themeIcon"
-        :aria-label="t(`theme.${settings.theme}`)"
-        @click="settings.cycleTheme()"
-      />
-    </div>
+    <button type="button" class="pill wx-card" @click="emit('search')">
+      <q-icon name="mdi-magnify" size="20px" />
+      <span>
+        {{ t("search.placeholder") }}
+      </span>
+    </button>
+
+    <q-btn
+      flat
+      round
+      dense
+      class="wx-icon-btn"
+      icon="mdi-refresh"
+      :loading="weather.status === 'refreshing'"
+      :disable="!weather.target"
+      :aria-label="t('common.refresh')"
+      @click="weather.refresh()"
+    />
+    <q-btn
+      flat
+      round
+      dense
+      class="wx-icon-btn"
+      :icon="themeIcon"
+      :aria-label="t(`theme.${settings.theme}`)"
+      @click="settings.cycleTheme()"
+    />
   </header>
 </template>
 
@@ -49,19 +55,22 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 4px 4px;
+  gap: 8px;
+  padding: 12px 0 4px;
 }
 
-.app-title {
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--text-muted);
-}
-
-.topbar-actions {
+.pill {
   display: flex;
-  gap: 4px;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
 }
 </style>
