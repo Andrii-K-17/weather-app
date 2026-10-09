@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed, onMounted, watch } from "vue";
+import { useQuasar } from "quasar";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import AppTopBar from "@/components/AppTopBar.vue";
+import CurrentWeather from "@/components/weather/CurrentWeather.vue";
+import DailyForecast from "@/components/weather/DailyForecast.vue";
+import DetailsGrid from "@/components/weather/DetailsGrid.vue";
 import HomeSkeleton from "@/components/weather/HomeSkeleton.vue";
+import HourlyStrip from "@/components/weather/HourlyStrip.vue";
+import { useAutoRefresh } from "@/composables/useAutoRefresh";
 import { useErrorMessage } from "@/composables/useErrorMessage";
 import { useWeatherStore } from "@/stores/weather";
-import CurrentWeather from "@/components/weather/CurrentWeather.vue";
-import DetailsGrid from "@/components/weather/DetailsGrid.vue";
-import HourlyStrip from "@/components/weather/HourlyStrip.vue";
-import DailyForecast from "@/components/weather/DailyForecast.vue";
 
+const $q = useQuasar();
 const { t } = useI18n();
 const errorMessage = useErrorMessage();
 
@@ -27,39 +30,69 @@ const showSkeleton = computed(
 onMounted(() => {
   if (!weather.overview) void weather.load(DEFAULT_CITY);
 });
+
+useAutoRefresh({
+  refresh: () => weather.refresh(),
+  lastUpdated: () =>
+    overview.value ? new Date(overview.value.fetchedAt).getTime() : null,
+});
+
+watch(status, (s) => {
+  if (s === "error" && overview.value) {
+    $q.notify({
+      message: errorMessage(errorCode.value),
+      icon: "mdi-cloud-alert-outline",
+      classes: "wx-toast",
+    });
+  }
+});
+
+async function onRefresh(done: () => void) {
+  try {
+    await weather.refresh();
+  } finally {
+    done();
+  }
+}
 </script>
 
 <template>
   <q-page>
-    <div class="wx-container">
-      <AppTopBar />
+    <q-pull-to-refresh no-mouse @refresh="onRefresh">
+      <div class="wx-container">
+        <AppTopBar />
 
-      <HomeSkeleton v-if="showSkeleton" />
+        <HomeSkeleton v-if="showSkeleton" />
 
-      <div v-else-if="!overview" class="state wx-card">
-        <q-icon name="mdi-cloud-off-outline" size="40px" class="wx-muted" />
-        <p class="state-message">{{ errorMessage(errorCode) }}</p>
-        <q-btn
-          flat
-          rounded
-          no-caps
-          :label="t('common.retry')"
-          @click="weather.refresh()"
-        />
+        <div v-else-if="!overview" class="state wx-card" role="alert">
+          <q-icon name="mdi-cloud-off-outline" size="40px" class="wx-muted" />
+          <p class="state-message">{{ errorMessage(errorCode) }}</p>
+          <q-btn
+            flat
+            rounded
+            :label="t('common.retry')"
+            @click="weather.refresh()"
+          />
+        </div>
+
+        <div v-else class="stack">
+          <CurrentWeather :overview="overview" :city-name="cityName" />
+          <HourlyStrip :overview="overview" />
+          <DailyForecast v-if="overview.daily.length" :overview="overview" />
+          <DetailsGrid :current="overview.current" />
+        </div>
       </div>
-
-      <CurrentWeather v-else :overview="overview" :city-name="cityName" />
-
-      <DetailsGrid v-if="overview" :current="overview.current" />
-
-      <DailyForecast v-if="overview" :overview="overview" />
-
-      <HourlyStrip v-if="overview" :overview="overview" />
-    </div>
+    </q-pull-to-refresh>
   </q-page>
 </template>
 
 <style scoped lang="scss">
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .state {
   display: flex;
   flex-direction: column;

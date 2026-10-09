@@ -16,7 +16,7 @@ const current = computed(() => props.overview.current);
 
 <template>
   <section class="current-weather">
-    <h1 class="city-name">{{ cityName }}</h1>
+    <div class="city-name">{{ cityName }}</div>
 
     <div class="temperature wx-temp">
       {{ roundTemp(current.temp) }}<span class="temperature-degree">°</span>
@@ -45,7 +45,7 @@ const current = computed(() => props.overview.current);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 28px 0 24px;
+  padding: 20px 0 20px;
   text-align: center;
 }
 

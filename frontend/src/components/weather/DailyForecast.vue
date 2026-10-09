@@ -65,7 +65,7 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
 
 <style scoped lang="scss">
 .daily-forecast {
-  padding: 3px 50px 8px;
+  padding: 3px clamp(12px, 5vw, 50px) 8px;
 }
 
 .daily-title {
@@ -81,11 +81,10 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
 
 .daily-row {
   display: grid;
-  grid-template-columns: 130px 78px 38px 58px 32px;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) 70px 38px 38px 36px;
+  gap: clamp(6px, 2vw, 10px);
   align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
+  padding: 10px 0;
 
   & + & {
     border-top: 1px solid var(--divider);
@@ -93,6 +92,10 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
 }
 
 .daily-day {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 500;
 }
@@ -107,7 +110,7 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--tone-rain);
 
   .pop-text {
