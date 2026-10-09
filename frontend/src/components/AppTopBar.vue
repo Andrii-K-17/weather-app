@@ -4,7 +4,8 @@ import { useI18n } from "vue-i18n";
 import { useSettingsStore } from "@/stores/settings";
 import { useWeatherStore } from "@/stores/weather";
 
-const emit = defineEmits<{ search: [] }>();
+defineProps<{ locating?: boolean; locationBlocked?: boolean }>();
+const emit = defineEmits<{ search: []; locate: [] }>();
 
 const { t } = useI18n();
 const settings = useSettingsStore();
@@ -27,6 +28,17 @@ const themeIcon = computed(() => ICONS[settings.theme]);
         {{ t("search.placeholder") }}
       </span>
     </button>
+
+    <q-btn
+      flat
+      round
+      dense
+      class="wx-icon-btn"
+      :icon="locationBlocked ? 'mdi-crosshairs-off' : 'mdi-crosshairs-gps'"
+      :loading="locating"
+      :aria-label="t('location.use')"
+      @click="emit('locate')"
+    />
 
     <q-btn
       flat

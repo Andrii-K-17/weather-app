@@ -65,7 +65,7 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
 
 <style scoped lang="scss">
 .daily-forecast {
-  padding: 3px clamp(12px, 5vw, 50px) 8px;
+  padding: 3px 25px 8px;
 }
 
 .daily-title {

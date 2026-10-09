@@ -15,6 +15,7 @@ import { useWeatherStore } from "@/stores/weather";
 import type { Place } from "@/api/types";
 import CitySearchDialog from "@/components/CitySearchDialog.vue";
 import ErrorCard from "@/components/weather/ErrorCard.vue";
+import { useGeolocation, GeoError } from "@/composables/useGeolocation";
 
 const $q = useQuasar();
 const { t } = useI18n();
@@ -34,6 +35,21 @@ const searchOpen = ref(false);
 
 function onPick(place: Place) {
   void weather.load({ lat: place.lat, lon: place.lon, name: place.name });
+}
+
+const geo = useGeolocation();
+
+async function onLocate() {
+  try {
+    const { lat, lon } = await geo.locate();
+    await weather.load({ lat, lon });
+  } catch (e) {
+    $q.notify({
+      message: errorMessage(e instanceof GeoError ? e.code : "geo_unavailable"),
+      icon: "mdi-crosshairs-off",
+      classes: "wx-toast",
+    });
+  }
 }
 
 onMounted(() => {
@@ -69,7 +85,12 @@ async function onRefresh(done: () => void) {
   <q-page>
     <q-pull-to-refresh no-mouse @refresh="onRefresh">
       <div class="wx-container">
-        <AppTopBar @search="searchOpen = true" />
+        <AppTopBar
+          :locating="geo.locating.value"
+          :location-blocked="geo.permission.value === 'denied'"
+          @search="searchOpen = true"
+          @locate="onLocate"
+        />
 
         <HomeSkeleton v-if="showSkeleton" />
 
@@ -90,7 +111,7 @@ async function onRefresh(done: () => void) {
       </div>
     </q-pull-to-refresh>
 
-    <CitySearchDialog v-model="searchOpen" @pick="onPick" />
+    <CitySearchDialog v-model="searchOpen" @pick="onPick" @locate="onLocate" />
   </q-page>
 </template>
 
