@@ -4,12 +4,14 @@ import { ApiError } from "@/api/client";
 import { weatherApi } from "@/api/weather";
 import type { ApiErrorCode, WeatherOverview } from "@/api/types";
 import { useSettingsStore } from "@/stores/settings";
+import { storage } from "@/utils/storage";
 import { getWeatherVisual, type Scene } from "@/utils/weatherVisual";
 
 export interface WeatherTarget {
   lat: number;
   lon: number;
   name?: string;
+  current?: boolean;
 }
 
 export type WeatherStatus =
@@ -19,9 +21,20 @@ export type WeatherStatus =
   | "success"
   | "error";
 
-/**
- * useWeatherStore manages weather overview data, loading states, targets, and asynchronous fetch requests.
- */
+const LAST_TARGET_KEY = "wx:v1:last-target";
+
+/** Validates whether an unknown value is a valid weather target object. */
+const isTarget = (v: unknown): v is WeatherTarget => {
+  if (typeof v !== "object" || v === null) return false;
+  const t = v as Partial<WeatherTarget>;
+  return (
+    typeof t.lat === "number" &&
+    typeof t.lon === "number" &&
+    Math.abs(t.lat) <= 90 &&
+    Math.abs(t.lon) <= 180
+  );
+};
+
 export const useWeatherStore = defineStore("weather", () => {
   const settings = useSettingsStore();
 
@@ -38,11 +51,20 @@ export const useWeatherStore = defineStore("weather", () => {
     () => target.value?.name ?? overview.value?.location.name ?? "",
   );
 
+  /** The last successfully viewed place. */
+  function savedTarget(): WeatherTarget | null {
+    return storage.get(LAST_TARGET_KEY, isTarget);
+  }
+
   /**
    * Load weather for a place. A newer call cancels the previous one.
-   * silent=true keeps the current data on screen.
+   * silent: keep the current data on screen (auto-refresh).
+   * persist: remember the place for the next launch.
    */
-  async function load(next: WeatherTarget, opts: { silent?: boolean } = {}) {
+  async function load(
+    next: WeatherTarget,
+    opts: { silent?: boolean; persist?: boolean } = {},
+  ) {
     controller?.abort();
     controller = new AbortController();
     const { signal } = controller;
@@ -73,9 +95,12 @@ export const useWeatherStore = defineStore("weather", () => {
         data.current.isDay,
       ).scene;
       status.value = "success";
+
+      if (opts.persist !== false) storage.set(LAST_TARGET_KEY, next);
     } catch (e) {
       if (signal.aborted) return;
       errorCode.value = e instanceof ApiError ? e.code : "unknown";
+
       if (!overview.value && previous.overview) {
         overview.value = previous.overview;
         target.value = previous.target;
@@ -98,6 +123,7 @@ export const useWeatherStore = defineStore("weather", () => {
     target,
     cityName,
     scene,
+    savedTarget,
     load,
     refresh,
   };

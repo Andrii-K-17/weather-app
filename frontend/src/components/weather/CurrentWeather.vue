@@ -6,7 +6,11 @@ import WeatherIcon from "@/components/weather/WeatherIcon.vue";
 import { useFormatters } from "@/composables/useFormatters";
 import { roundTemp } from "@/utils/format";
 
-const props = defineProps<{ overview: WeatherOverview; cityName: string }>();
+const props = defineProps<{
+  overview: WeatherOverview;
+  cityName: string;
+  isCurrentLocation?: boolean;
+}>();
 
 const { t } = useI18n();
 const fmt = useFormatters();
@@ -16,7 +20,15 @@ const current = computed(() => props.overview.current);
 
 <template>
   <section class="current-weather">
-    <div class="city-name">{{ cityName }}</div>
+    <div class="city-name">
+      <q-icon
+        v-if="isCurrentLocation"
+        name="mdi-compass-outline"
+        size="18px"
+        class="current-gps"
+      />
+      {{ cityName }}
+    </div>
 
     <div class="temperature wx-temp">
       {{ roundTemp(current.temp) }}<span class="temperature-degree">°</span>
@@ -50,6 +62,10 @@ const current = computed(() => props.overview.current);
 }
 
 .city-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   font-size: 22px;
   font-weight: 400;
@@ -89,5 +105,10 @@ const current = computed(() => props.overview.current);
   margin-top: 14px;
   font-size: 12px;
   color: var(--text-faint);
+}
+
+.current-gps {
+  margin-right: 4px;
+  color: var(--text-muted);
 }
 </style>
