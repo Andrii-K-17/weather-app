@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import type { WeatherOverview } from "@/api/types";
-import WeatherIcon from "@/components/weather/WeatherIcon.vue";
-import { useFormatters } from "@/composables/useFormatters";
-import { roundTemp } from "@/utils/format";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import type { WeatherOverview } from '@/api/types';
+import WeatherIcon from '@/components/weather/WeatherIcon.vue';
+import { useFormatters } from '@/composables/useFormatters';
+import { roundTemp } from '@/utils/format';
 
 const props = defineProps<{
   overview: WeatherOverview;
@@ -35,19 +35,20 @@ const current = computed(() => props.overview.current);
     </div>
 
     <div class="condition">
-      <WeatherIcon :condition="current.condition" size="26px" />
-      <span class="condition-description">{{
-        current.condition.description
-      }}</span>
+      <WeatherIcon
+        :condition="current.condition"
+        size="26px"
+      />
+      <span class="condition-description">{{ current.condition.description }}</span>
     </div>
 
     <div class="range wx-muted">
-      {{ t("weather.high") }} {{ roundTemp(current.tempMax) }}° ·
-      {{ t("weather.low") }} {{ roundTemp(current.tempMin) }}°
+      {{ t('weather.high') }} {{ roundTemp(current.tempMax) }}° · {{ t('weather.low') }}
+      {{ roundTemp(current.tempMin) }}°
     </div>
 
     <div class="updated-at">
-      {{ t("home.updatedAt", { time: fmt.updatedAt(overview.fetchedAt) }) }}
+      {{ t('home.updatedAt', { time: fmt.updatedAt(overview.fetchedAt) }) }}
     </div>
   </section>
 </template>

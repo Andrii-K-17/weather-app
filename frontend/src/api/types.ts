@@ -65,13 +65,13 @@ export interface Place {
 }
 
 export type ApiErrorCode =
-  | "invalid_request"
-  | "not_found"
-  | "upstream_busy"
-  | "upstream_error"
-  | "timeout"
-  | "too_many_requests"
-  | "internal"
-  | "network"
-  | "aborted"
-  | "unknown";
+  | 'invalid_request'
+  | 'not_found'
+  | 'upstream_busy'
+  | 'upstream_error'
+  | 'timeout'
+  | 'too_many_requests'
+  | 'internal'
+  | 'network'
+  | 'aborted'
+  | 'unknown';

@@ -1,9 +1,26 @@
 <template>
-  <div class="skeleton" aria-busy="true">
+  <div
+    class="skeleton"
+    aria-busy="true"
+  >
     <div class="skeleton-hero">
-      <q-skeleton type="text" width="38%" height="26px" animation="pulse" />
-      <q-skeleton type="text" width="52%" height="96px" animation="pulse" />
-      <q-skeleton type="text" width="34%" animation="pulse" />
+      <q-skeleton
+        type="text"
+        width="38%"
+        height="26px"
+        animation="pulse"
+      />
+      <q-skeleton
+        type="text"
+        width="52%"
+        height="96px"
+        animation="pulse"
+      />
+      <q-skeleton
+        type="text"
+        width="34%"
+        animation="pulse"
+      />
     </div>
     <q-skeleton
       type="rect"

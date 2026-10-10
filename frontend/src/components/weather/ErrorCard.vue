@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import type { ApiErrorCode } from "@/api/types";
-import { useErrorMessage } from "@/composables/useErrorMessage";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import type { ApiErrorCode } from '@/api/types';
+import { useErrorMessage } from '@/composables/useErrorMessage';
 
 const props = defineProps<{ code: ApiErrorCode | null; retrying?: boolean }>();
 const emit = defineEmits<{ retry: []; search: [] }>();
@@ -11,21 +11,26 @@ const { t } = useI18n();
 const message = useErrorMessage();
 
 const ICONS: Partial<Record<ApiErrorCode, string>> = {
-  not_found: "mdi-map-marker-question-outline",
-  network: "mdi-wifi-off",
-  timeout: "mdi-timer-sand",
-  upstream_busy: "mdi-timer-sand",
-  too_many_requests: "mdi-timer-sand",
+  not_found: 'mdi-map-marker-question-outline',
+  network: 'mdi-wifi-off',
+  timeout: 'mdi-timer-sand',
+  upstream_busy: 'mdi-timer-sand',
+  too_many_requests: 'mdi-timer-sand',
 };
 
-const icon = computed(
-  () => (props.code && ICONS[props.code]) || "mdi-cloud-off-outline",
-);
+const icon = computed(() => (props.code && ICONS[props.code]) || 'mdi-cloud-off-outline');
 </script>
 
 <template>
-  <div class="error wx-card" role="alert">
-    <q-icon :name="icon" size="44px" class="icon" />
+  <div
+    class="error wx-card"
+    role="alert"
+  >
+    <q-icon
+      :name="icon"
+      size="44px"
+      class="icon"
+    />
     <p class="text">{{ message(code) }}</p>
 
     <q-btn

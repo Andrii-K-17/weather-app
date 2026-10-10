@@ -1,9 +1,9 @@
-import { useQuasar } from "quasar";
-import { weatherApi } from "@/api/weather";
-import { GeoError, useGeolocation } from "@/composables/useGeolocation";
-import { useErrorMessage } from "@/composables/useErrorMessage";
-import { useSettingsStore } from "@/stores/settings";
-import { useWeatherStore } from "@/stores/weather";
+import { useQuasar } from 'quasar';
+import { weatherApi } from '@/api/weather';
+import { GeoError, useGeolocation } from '@/composables/useGeolocation';
+import { useErrorMessage } from '@/composables/useErrorMessage';
+import { useSettingsStore } from '@/stores/settings';
+import { useWeatherStore } from '@/stores/weather';
 
 export function useCurrentLocation() {
   const $q = useQuasar();
@@ -13,20 +13,16 @@ export function useCurrentLocation() {
   const geo = useGeolocation();
 
   /** Returns false if the position could not be determined. */
-  async function locateAndLoad(
-    opts: { quiet?: boolean } = {},
-  ): Promise<boolean> {
+  async function locateAndLoad(opts: { quiet?: boolean } = {}): Promise<boolean> {
     let coords;
     try {
       coords = await geo.locate();
     } catch (e) {
       if (!opts.quiet) {
         $q.notify({
-          message: errorMessage(
-            e instanceof GeoError ? e.code : "geo_unavailable",
-          ),
-          icon: "mdi-crosshairs-off",
-          classes: "wx-toast",
+          message: errorMessage(e instanceof GeoError ? e.code : 'geo_unavailable'),
+          icon: 'mdi-crosshairs-off',
+          classes: 'wx-toast',
         });
       }
       return false;
@@ -40,7 +36,7 @@ export function useCurrentLocation() {
     const weatherTarget = {
       lat: coords.lat,
       lon: coords.lon,
-      ...(typeof place?.name === "string" ? { name: place.name } : {}),
+      ...(typeof place?.name === 'string' ? { name: place.name } : {}),
       current: true,
     };
 

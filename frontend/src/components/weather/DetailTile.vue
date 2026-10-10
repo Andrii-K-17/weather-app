@@ -10,7 +10,11 @@ defineProps<{
 <template>
   <div class="detail-tile wx-card">
     <div class="detail-tile-head">
-      <q-icon :name="icon" size="18px" aria-hidden="true" />
+      <q-icon
+        :name="icon"
+        size="18px"
+        aria-hidden="true"
+      />
       <span class="wx-label">{{ label }}</span>
     </div>
 
@@ -19,7 +23,10 @@ defineProps<{
       <slot name="suffix" />
     </div>
 
-    <div v-if="meter !== undefined" class="detail-tile-meter">
+    <div
+      v-if="meter !== undefined"
+      class="detail-tile-meter"
+    >
       <span
         class="detail-tile-meter-fill"
         :style="{ width: `${Math.min(Math.max(meter, 0), 100)}%` }"

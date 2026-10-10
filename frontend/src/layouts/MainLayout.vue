@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useWeatherStore } from "@/stores/weather";
+import { useWeatherStore } from '@/stores/weather';
 
 const weather = useWeatherStore();
 </script>

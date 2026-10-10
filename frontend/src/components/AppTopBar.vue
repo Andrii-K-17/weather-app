@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { useSettingsStore } from "@/stores/settings";
-import { useWeatherStore } from "@/stores/weather";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useSettingsStore } from '@/stores/settings';
+import { useWeatherStore } from '@/stores/weather';
 
 defineProps<{ locating?: boolean; locationBlocked?: boolean }>();
 const emit = defineEmits<{ search: []; locate: [] }>();
@@ -12,9 +12,9 @@ const settings = useSettingsStore();
 const weather = useWeatherStore();
 
 const ICONS = {
-  system: "mdi-theme-light-dark",
-  light: "mdi-weather-sunny",
-  dark: "mdi-weather-night",
+  system: 'mdi-theme-light-dark',
+  light: 'mdi-weather-sunny',
+  dark: 'mdi-weather-night',
 } as const;
 
 const themeIcon = computed(() => ICONS[settings.theme]);
@@ -22,10 +22,17 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 <template>
   <header class="topbar">
-    <button type="button" class="pill wx-card" @click="emit('search')">
-      <q-icon name="mdi-magnify" size="20px" />
+    <button
+      type="button"
+      class="pill wx-card"
+      @click="emit('search')"
+    >
+      <q-icon
+        name="mdi-magnify"
+        size="20px"
+      />
       <span>
-        {{ t("search.placeholder") }}
+        {{ t('search.placeholder') }}
       </span>
     </button>
 

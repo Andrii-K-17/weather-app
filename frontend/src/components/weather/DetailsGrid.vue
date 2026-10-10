@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import type { CurrentWeather } from "@/api/types";
-import DetailTile from "@/components/weather/DetailTile.vue";
-import { useFormatters } from "@/composables/useFormatters";
-import { roundTemp } from "@/utils/format";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import type { CurrentWeather } from '@/api/types';
+import DetailTile from '@/components/weather/DetailTile.vue';
+import { useFormatters } from '@/composables/useFormatters';
+import { roundTemp } from '@/utils/format';
 
 const props = defineProps<{ current: CurrentWeather }>();
 
@@ -15,9 +15,7 @@ const windKmh = computed(() => Math.round(props.current.windSpeed * 3.6));
 
 const visibility = computed(() => {
   const m = props.current.visibility;
-  return m >= 1000
-    ? `${fmt.number(m / 1000, 1)} ${t("units.km")}`
-    : `${m} ${t("units.m")}`;
+  return m >= 1000 ? `${fmt.number(m / 1000, 1)} ${t('units.km')}` : `${m} ${t('units.m')}`;
 });
 
 // Wind direction is where it blows FROM; the arrow shows where it blows TO

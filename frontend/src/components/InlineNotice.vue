@@ -10,15 +10,31 @@ const emit = defineEmits<{ action: [] }>();
 </script>
 
 <template>
-  <q-banner rounded class="notice" role="status">
+  <q-banner
+    rounded
+    class="notice"
+    role="status"
+  >
     <template #avatar>
-      <q-icon :name="icon" size="22px" class="icon" />
+      <q-icon
+        :name="icon"
+        size="22px"
+        class="icon"
+      />
     </template>
 
     <div class="text">{{ text }}</div>
-    <div v-if="hint" class="hint">{{ hint }}</div>
+    <div
+      v-if="hint"
+      class="hint"
+    >
+      {{ hint }}
+    </div>
 
-    <template v-if="actionLabel" #action>
+    <template
+      v-if="actionLabel"
+      #action
+    >
       <q-btn
         flat
         dense

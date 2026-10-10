@@ -1,12 +1,12 @@
-import { defineConfig } from "#q-app";
+import { defineConfig } from '#q-app';
 
 export default defineConfig((ctx) => {
   return {
-    boot: ["i18n", "pinia"],
+    boot: ['i18n', 'pinia'],
 
-    css: ["app.scss"],
+    css: ['app.scss'],
 
-    extras: ["material-icons", "mdi-v7"],
+    extras: ['material-icons', 'mdi-v7'],
 
     build: {
       target: {
@@ -20,7 +20,7 @@ export default defineConfig((ctx) => {
         // extendTsConfig (tsConfig) {}
       },
 
-      vueRouterMode: "hash",
+      vueRouterMode: 'hash',
       // vueRouterBase,
 
       // publicPath: '/',
@@ -37,10 +37,10 @@ export default defineConfig((ctx) => {
 
       vitePlugins: [
         [
-          "@intlify/unplugin-vue-i18n/vite",
+          '@intlify/unplugin-vue-i18n/vite',
           {
             ssr: ctx.mode.ssr || ctx.mode.ssg,
-            include: [ctx.appPaths.resolve.app("src/i18n")],
+            include: [ctx.appPaths.resolve.app('src/i18n')],
           },
         ],
       ],
@@ -49,8 +49,8 @@ export default defineConfig((ctx) => {
     devServer: {
       open: false,
       proxy: {
-        "/api": {
-          target: "http://localhost:8080",
+        '/api': {
+          target: 'http://localhost:8080',
           changeOrigin: true,
         },
       },
@@ -58,10 +58,10 @@ export default defineConfig((ctx) => {
 
     framework: {
       config: {
-        dark: "auto",
-        notify: { position: "top", timeout: 2500 },
+        dark: 'auto',
+        notify: { position: 'top', timeout: 2500 },
       },
-      plugins: ["Dark", "LocalStorage", "Notify"],
+      plugins: ['Dark', 'LocalStorage', 'Notify'],
     },
 
     // animations: 'all', // --- includes all animations
@@ -89,7 +89,7 @@ export default defineConfig((ctx) => {
        */
       prodPort: 3000,
       middlewares: [
-        "render", // keep this as last one
+        'render', // keep this as last one
       ],
 
       // clientSideRenderingRoutes: [],
@@ -135,7 +135,7 @@ export default defineConfig((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
     pwa: {
-      workboxMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
+      workboxMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       // swFilename: 'sw.js',
       // manifestFilename: 'manifest.json',
       // extendPWAManifestJson (json) {},
@@ -162,12 +162,12 @@ export default defineConfig((ctx) => {
       // extendElectronPackageJson (pkgJson) {},
 
       // Electron preload scripts (if any) from /src-electron, WITHOUT file extension
-      preloadScripts: ["electron-preload"],
+      preloadScripts: ['electron-preload'],
 
       // specify the debugging port to use for the Electron app when running in development mode
       inspectPort: 5858,
 
-      bundler: "packager", // 'packager' or 'builder'
+      bundler: 'packager', // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -183,7 +183,7 @@ export default defineConfig((ctx) => {
       builder: {
         // https://www.electron.build/configuration
 
-        appId: "frontend",
+        appId: 'frontend',
       },
     },
 

@@ -1,4 +1,4 @@
-import type { Place } from "@/api/types";
+import type { Place } from '@/api/types';
 
 export interface PlaceLabel {
   title: string;
@@ -9,11 +9,11 @@ const regionNames = new Map<string, Intl.DisplayNames>();
 
 /** countryName translates a country code into its localized display name. */
 export function countryName(code: string, locale: string): string {
-  if (!code) return "";
+  if (!code) return '';
   try {
     let names = regionNames.get(locale);
     if (!names) {
-      names = new Intl.DisplayNames([locale], { type: "region" });
+      names = new Intl.DisplayNames([locale], { type: 'region' });
       regionNames.set(locale, names);
     }
     return names.of(code) ?? code;
@@ -23,9 +23,7 @@ export function countryName(code: string, locale: string): string {
 }
 
 export function placeLabel(place: Place, locale: string): PlaceLabel {
-  const subtitle = [place.state, countryName(place.country, locale)]
-    .filter(Boolean)
-    .join(", ");
+  const subtitle = [place.state, countryName(place.country, locale)].filter(Boolean).join(', ');
   return { title: place.name, subtitle };
 }
 
@@ -33,7 +31,7 @@ export function placeLabel(place: Place, locale: string): PlaceLabel {
 export function dedupePlaces(places: Place[]): Place[] {
   const seen = new Set<string>();
   return places.filter((p) => {
-    const key = `${p.name}|${p.state ?? ""}|${p.country}`.toLowerCase();
+    const key = `${p.name}|${p.state ?? ''}|${p.country}`.toLowerCase();
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

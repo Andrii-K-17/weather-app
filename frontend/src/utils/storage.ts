@@ -1,4 +1,4 @@
-import { LocalStorage } from "quasar";
+import { LocalStorage } from 'quasar';
 
 /**
  * Safe LocalStorage wrapper.

@@ -4,8 +4,14 @@
     <title><%= productName %></title>
 
     <meta charset="utf-8" />
-    <meta name="description" content="<%= productDescription %>" />
-    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="<%= productDescription %>"
+    />
+    <meta
+      name="format-detection"
+      content="telephone=no"
+    />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover<% } %>"
@@ -15,8 +21,15 @@
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;<% if (ctx.dev) { %> connect-src 'self' ws://localhost:*; worker-src 'self' blob:;<% } %>"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
@@ -45,7 +58,11 @@
       sizes="16x16"
       href="icons/favicon-16x16.png"
     />
-    <link rel="icon" type="image/ico" href="favicon.ico" />
+    <link
+      rel="icon"
+      type="image/ico"
+      href="favicon.ico"
+    />
     <link
       rel="apple-touch-icon"
       sizes="180x180"

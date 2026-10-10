@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import type { Place } from "@/api/types";
-import { useCitySearch } from "@/composables/useCitySearch";
-import { useErrorMessage } from "@/composables/useErrorMessage";
-import { placeLabel } from "@/utils/place";
-import InlineNotice from "@/components/InlineNotice.vue";
+import { useI18n } from 'vue-i18n';
+import type { Place } from '@/api/types';
+import { useCitySearch } from '@/composables/useCitySearch';
+import { useErrorMessage } from '@/composables/useErrorMessage';
+import { placeLabel } from '@/utils/place';
+import InlineNotice from '@/components/InlineNotice.vue';
 
 const open = defineModel<boolean>({ required: true });
 const emit = defineEmits<{ pick: [place: Place]; locate: [] }>();
@@ -14,12 +14,12 @@ const errorMessage = useErrorMessage();
 const { query, results, status, errorCode, retry, reset } = useCitySearch();
 
 function onPick(place: Place) {
-  emit("pick", place);
+  emit('pick', place);
   open.value = false;
 }
 
 function onLocate() {
-  emit("locate");
+  emit('locate');
   open.value = false;
 }
 </script>
@@ -66,11 +66,18 @@ function onLocate() {
           class="place"
           @click="onLocate"
         >
-          <q-icon name="mdi-crosshairs-gps" size="22px" class="icon" />
-          <span class="place-title">{{ t("search.useLocation") }}</span>
+          <q-icon
+            name="mdi-crosshairs-gps"
+            size="22px"
+            class="icon"
+          />
+          <span class="place-title">{{ t('search.useLocation') }}</span>
         </button>
 
-        <div v-else-if="status === 'loading'" class="skeleton">
+        <div
+          v-else-if="status === 'loading'"
+          class="skeleton"
+        >
           <q-skeleton
             v-for="n in 3"
             :key="n"
@@ -80,10 +87,24 @@ function onLocate() {
           />
         </div>
 
-        <ul v-else-if="status === 'done' && results.length" class="sheet-list">
-          <li v-for="p in results" :key="`${p.lat},${p.lon}`">
-            <button type="button" class="place" @click="onPick(p)">
-              <q-icon name="mdi-map-marker-outline" size="22px" class="icon" />
+        <ul
+          v-else-if="status === 'done' && results.length"
+          class="sheet-list"
+        >
+          <li
+            v-for="p in results"
+            :key="`${p.lat},${p.lon}`"
+          >
+            <button
+              type="button"
+              class="place"
+              @click="onPick(p)"
+            >
+              <q-icon
+                name="mdi-map-marker-outline"
+                size="22px"
+                class="icon"
+              />
               <span class="place-text">
                 <span class="place-title">
                   {{ placeLabel(p, locale).title }}

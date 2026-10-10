@@ -1,34 +1,33 @@
-import { computed, ref, watch } from "vue";
-import { defineStore } from "pinia";
-import { Dark } from "quasar";
-import { storage } from "@/utils/storage";
+import { computed, ref, watch } from 'vue';
+import { defineStore } from 'pinia';
+import { Dark } from 'quasar';
+import { storage } from '@/utils/storage';
 
-export type ThemeMode = "system" | "light" | "dark";
-export type AppLocale = "en-US" | "uk";
+export type ThemeMode = 'system' | 'light' | 'dark';
+export type AppLocale = 'en-US' | 'uk';
 
-const THEME_KEY = "wx:v1:theme";
-const LANG_KEY = "wx:v1:lang";
-const THEME_ORDER: ThemeMode[] = ["system", "light", "dark"];
+const THEME_KEY = 'wx:v1:theme';
+const LANG_KEY = 'wx:v1:lang';
+const THEME_ORDER: ThemeMode[] = ['system', 'light', 'dark'];
 
 /** isTheme checks whether an unknown value is a valid ThemeMode. */
-const isTheme = (v: unknown): v is ThemeMode =>
-  v === "system" || v === "light" || v === "dark";
+const isTheme = (v: unknown): v is ThemeMode => v === 'system' || v === 'light' || v === 'dark';
 
 /** isLocale checks whether an unknown value is a valid AppLocale. */
-const isLocale = (v: unknown): v is AppLocale => v === "en-US" || v === "uk";
+const isLocale = (v: unknown): v is AppLocale => v === 'en-US' || v === 'uk';
 
 /** useSettingsStore manages application theme preferences and localization settings. */
-export const useSettingsStore = defineStore("settings", () => {
-  const theme = ref<ThemeMode>(storage.get(THEME_KEY, isTheme) ?? "system");
-  const language = ref<AppLocale>(storage.get(LANG_KEY, isLocale) ?? "en-US");
+export const useSettingsStore = defineStore('settings', () => {
+  const theme = ref<ThemeMode>(storage.get(THEME_KEY, isTheme) ?? 'system');
+  const language = ref<AppLocale>(storage.get(LANG_KEY, isLocale) ?? 'en-US');
 
   /** apiLang returns the normalized language code for backend API requests. */
-  const apiLang = computed(() => (language.value === "uk" ? "uk" : "en"));
+  const apiLang = computed(() => (language.value === 'uk' ? 'uk' : 'en'));
 
   watch(
     theme,
     (mode) => {
-      Dark.set(mode === "system" ? "auto" : mode === "dark");
+      Dark.set(mode === 'system' ? 'auto' : mode === 'dark');
       storage.set(THEME_KEY, mode);
     },
     { immediate: true },
@@ -44,7 +43,7 @@ export const useSettingsStore = defineStore("settings", () => {
   /** cycleTheme rotates to the next available theme mode in sequence. */
   function cycleTheme() {
     const next = (THEME_ORDER.indexOf(theme.value) + 1) % THEME_ORDER.length;
-    theme.value = THEME_ORDER[next] ?? "system";
+    theme.value = THEME_ORDER[next] ?? 'system';
   }
 
   return {

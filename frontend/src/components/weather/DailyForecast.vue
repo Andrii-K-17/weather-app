@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import type { DailyPoint, WeatherOverview } from "@/api/types";
-import WeatherIcon from "@/components/weather/WeatherIcon.vue";
-import { useFormatters } from "@/composables/useFormatters";
-import { localDate, roundTemp } from "@/utils/format";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import type { DailyPoint, WeatherOverview } from '@/api/types';
+import WeatherIcon from '@/components/weather/WeatherIcon.vue';
+import { useFormatters } from '@/composables/useFormatters';
+import { localDate, roundTemp } from '@/utils/format';
 
 const props = defineProps<{ overview: WeatherOverview }>();
 
@@ -12,14 +12,11 @@ const { t } = useI18n();
 const fmt = useFormatters();
 
 const today = computed(() =>
-  localDate(
-    props.overview.current.observedAt,
-    props.overview.location.timezoneOffset,
-  ),
+  localDate(props.overview.current.observedAt, props.overview.location.timezoneOffset),
 );
 
 const dayLabel = (d: DailyPoint) =>
-  d.date === today.value ? t("weather.today") : fmt.weekday(d.date);
+  d.date === today.value ? t('weather.today') : fmt.weekday(d.date);
 
 const popPercent = (pop: number) => Math.round(pop * 100);
 const popLabel = (pop: number) => `${popPercent(pop)}%`;
@@ -27,10 +24,14 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
 
 <template>
   <section class="daily-forecast wx-card">
-    <div class="daily-title wx-label">{{ t("weather.daily") }}</div>
+    <div class="daily-title wx-label">{{ t('weather.daily') }}</div>
 
     <ul class="daily-list">
-      <li v-for="d in overview.daily" :key="d.date" class="daily-row">
+      <li
+        v-for="d in overview.daily"
+        :key="d.date"
+        class="daily-row"
+      >
         <span class="daily-day">{{ dayLabel(d) }}</span>
 
         <span class="daily-pop">
@@ -45,14 +46,21 @@ const popLabel = (pop: number) => `${popPercent(pop)}%`;
               class="drop-fill"
               :style="{ height: `${popPercent(d.pop)}%` }"
             >
-              <q-icon name="mdi-water" size="18px" aria-hidden="true" />
+              <q-icon
+                name="mdi-water"
+                size="18px"
+                aria-hidden="true"
+              />
             </span>
           </span>
           <span class="pop-text">{{ popLabel(d.pop) }}</span>
         </span>
 
         <span class="daily-icon">
-          <WeatherIcon :condition="d.condition" size="26px" />
+          <WeatherIcon
+            :condition="d.condition"
+            size="26px"
+          />
         </span>
 
         <span class="daily-max">{{ roundTemp(d.tempMax) }}°</span>

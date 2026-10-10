@@ -1,4 +1,4 @@
-@use "sass:list";
+@use 'sass:list';
 
 $scenes-light: (
   clear: (
@@ -63,12 +63,12 @@ $scenes-dark: (
 );
 
 @property --sky-top {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: true;
   initial-value: #d9eafb;
 }
 @property --sky-bottom {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: true;
   initial-value: #f6faff;
 }
@@ -128,14 +128,14 @@ body.body--dark {
 }
 
 @each $name, $pair in $scenes-light {
-  body.body--light .scene-#{"" + $name} {
+  body.body--light .scene-#{'' + $name} {
     --sky-top: #{list.nth($pair, 1)};
     --sky-bottom: #{list.nth($pair, 2)};
   }
 }
 
 @each $name, $pair in $scenes-dark {
-  body.body--dark .scene-#{"" + $name} {
+  body.body--dark .scene-#{'' + $name} {
     --sky-top: #{list.nth($pair, 1)};
     --sky-bottom: #{list.nth($pair, 2)};
   }
@@ -143,7 +143,7 @@ body.body--dark {
 
 body {
   color: var(--text);
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
