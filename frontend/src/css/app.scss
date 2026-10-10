@@ -2,63 +2,63 @@
 
 $scenes-light: (
   clear: (
-    #d9eafb,
-    #f6faff,
+    #91c9f2,
+    #f8d9a5,
   ),
   night: (
-    #d7ddf2,
-    #eef0fa,
+    #8581c5,
+    #d9b8e6,
   ),
   clouds: (
-    #e3e9f1,
-    #f6f8fb,
+    #a8bacb,
+    #e1e5e9,
   ),
   rain: (
-    #d6e0eb,
-    #eef2f7,
+    #6686a3,
+    #aec4d8,
   ),
   storm: (
-    #dcd9ea,
-    #f1f0f7,
+    #51456f,
+    #a18ab6,
   ),
   snow: (
-    #e7f0f8,
-    #f9fcfe,
+    #a7d9e9,
+    #effbff,
   ),
   mist: (
-    #e7e9eb,
-    #f6f6f5,
+    #bac5b6,
+    #e8e6d9,
   ),
 );
 
 $scenes-dark: (
   clear: (
-    #1f2f45,
-    #141b27,
+    #19466b,
+    #172a40,
   ),
   night: (
-    #1b2036,
-    #11141f,
+    #30295d,
+    #19172f,
   ),
   clouds: (
-    #252d38,
-    #151a21,
+    #354657,
+    #202a35,
   ),
   rain: (
-    #1f2b38,
-    #131920,
+    #1b3c57,
+    #122131,
   ),
   storm: (
-    #26233a,
-    #15141f,
+    #382950,
+    #1e172b,
   ),
   snow: (
-    #27323d,
-    #161b21,
+    #285364,
+    #192d38,
   ),
   mist: (
-    #2a2d31,
-    #17181a,
+    #414a40,
+    #272c26,
   ),
 );
 
@@ -156,9 +156,9 @@ body {
 
 .wx-container {
   width: 100%;
-  max-width: 560px;
+  max-width: 630px;
   margin: 0 auto;
-  padding: 8px 16px 48px;
+  padding: 8px 16px 20px;
 }
 
 .wx-card {

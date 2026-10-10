@@ -61,10 +61,11 @@ const popLabel = (pop: number | null) =>
 <style scoped lang="scss">
 .hourly-scroll {
   display: flex;
-  gap: 4px;
+  gap: 5px;
   padding: 15px 13px;
   overflow-x: auto;
   scrollbar-width: none;
+  justify-content: center;
 
   scroll-snap-type: x mandatory;
 
