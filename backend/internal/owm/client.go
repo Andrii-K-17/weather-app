@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// ErrNotFound indicates the requested weather data is missing.
 var (
 	ErrNotFound     = errors.New("owm: not found")
 	ErrUnauthorized = errors.New("owm: invalid API key")
@@ -20,22 +21,27 @@ var (
 
 const defaultBaseURL = "https://api.openweathermap.org"
 
+// Client is a thin OpenWeatherMap API client with custom base URL and HTTP options.
 type Client struct {
 	apiKey  string
 	baseURL string
 	http    *http.Client
 }
 
+// Option configures a Client during creation.
 type Option func(*Client)
 
+// WithBaseURL overrides the API base URL used by the client.
 func WithBaseURL(u string) Option {
 	return func(c *Client) { c.baseURL = u }
 }
 
+// WithHTTPClient sets a custom HTTP client for requests.
 func WithHTTPClient(h *http.Client) Option {
 	return func(c *Client) { c.http = h }
 }
 
+// NewClient creates a new OpenWeatherMap client using the provided API key.
 func NewClient(apiKey string, opts ...Option) *Client {
 	c := &Client{
 		apiKey:  apiKey,
@@ -48,6 +54,7 @@ func NewClient(apiKey string, opts ...Option) *Client {
 	return c
 }
 
+// get performs a GET request and decodes the JSON response into out.
 func (c *Client) get(ctx context.Context, path string, params url.Values, out any) error {
 	q := url.Values{}
 	for k, v := range params {
