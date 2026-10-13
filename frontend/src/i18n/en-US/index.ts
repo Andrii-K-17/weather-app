@@ -6,6 +6,7 @@ export default {
     retry: 'Try again',
     refresh: 'Refresh',
     cancel: 'Cancel',
+    more: 'More',
   },
   theme: {
     system: 'System theme',
@@ -60,5 +61,18 @@ export default {
     geo_unavailable: 'We couldn’t determine your location.',
     geo_timeout: 'Locating you took too long.',
     geo_unsupported: 'Location isn’t supported on this device.',
+  },
+  favorites: {
+    title: 'Cities',
+    add: 'Add to favorites',
+    remove: 'Remove from favorites',
+    addCity: 'Add city',
+    added: '{city} added to favorites',
+    removed: '{city} removed',
+    undo: 'Undo',
+    limit: 'You can save up to {max} cities',
+    empty: 'No saved cities yet',
+    emptyHint: 'Tap the heart on a city to keep it here.',
+    dot: 'City {n} of {total}',
   },
 };

@@ -101,6 +101,7 @@ body.body--light {
   --tone-snow: #8fc1e0;
   --tone-mist: #a9b4bd;
   background: #f6faff;
+  --heart: #e8909f;
 }
 
 body.body--dark {
@@ -125,6 +126,7 @@ body.body--dark {
   --tone-snow: #9cccea;
   --tone-mist: #98a4af;
   background: #141b27;
+  --heart: #ec9bab;
 }
 
 @each $name, $pair in $scenes-light {

@@ -16,10 +16,13 @@ import { useAutoRefresh } from '@/composables/useAutoRefresh';
 import { useCurrentLocation } from '@/composables/useCurrentLocation';
 import { useErrorMessage } from '@/composables/useErrorMessage';
 import { useWeatherStore } from '@/stores/weather';
+import { useFavorites } from '@/composables/useFavorites';
 
 const $q = useQuasar();
 const { t } = useI18n();
 const errorMessage = useErrorMessage();
+
+const { isFavorite, toggleCurrent } = useFavorites();
 
 const weather = useWeatherStore();
 const { overview, status, errorCode, cityName, target } = storeToRefs(weather);
@@ -108,6 +111,8 @@ async function onRefresh(done: () => void) {
             :overview="overview"
             :city-name="cityName"
             :is-current-location="target?.current ?? false"
+            :is-favorite="isFavorite"
+            @toggle-favorite="toggleCurrent"
           />
           <HourlyStrip :overview="overview" />
           <DailyForecast

@@ -10,7 +10,9 @@ const props = defineProps<{
   overview: WeatherOverview;
   cityName: string;
   isCurrentLocation?: boolean;
+  isFavorite?: boolean;
 }>();
+const emit = defineEmits<{ toggleFavorite: [] }>();
 
 const { t } = useI18n();
 const fmt = useFormatters();
@@ -20,18 +22,33 @@ const current = computed(() => props.overview.current);
 
 <template>
   <section class="current-weather">
-    <div class="city-name">
-      <q-icon
-        v-if="isCurrentLocation"
-        name="mdi-compass-outline"
-        size="18px"
-        class="current-gps"
+    <div class="head">
+      <div class="city-name">
+        <q-icon
+          v-if="isCurrentLocation"
+          name="mdi-compass-outline"
+          size="18px"
+          class="current-gps"
+        />
+        {{ cityName }}
+      </div>
+      <q-btn
+        flat
+        round
+        dense
+        size="sm"
+        class="fav"
+        :class="{ 'fav--on': isFavorite }"
+        :icon="isFavorite ? 'mdi-heart' : 'mdi-heart-outline'"
+        :aria-label="isFavorite ? t('favorites.remove') : t('favorites.add')"
+        :aria-pressed="isFavorite ? 'true' : 'false'"
+        @click="emit('toggleFavorite')"
       />
-      {{ cityName }}
     </div>
 
     <div class="temperature wx-temp">
-      {{ roundTemp(current.temp) }}<span class="temperature-degree">°</span>
+      {{ roundTemp(current.temp) }}
+      <span class="temperature-degree">°</span>
     </div>
 
     <div class="condition">
@@ -39,7 +56,9 @@ const current = computed(() => props.overview.current);
         :condition="current.condition"
         size="26px"
       />
-      <span class="condition-description">{{ current.condition.description }}</span>
+      <span class="condition-description">
+        {{ current.condition.description }}
+      </span>
     </div>
 
     <div class="range wx-muted">
@@ -60,6 +79,31 @@ const current = computed(() => props.overview.current);
   align-items: center;
   padding: 20px 0 20px;
   text-align: center;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.fav {
+  color: var(--text-faint);
+
+  &--on {
+    color: var(--heart);
+    animation: heart-pop 0.3s ease;
+  }
+}
+
+@keyframes heart-pop {
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .city-name {

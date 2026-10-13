@@ -35,38 +35,39 @@ const themeIcon = computed(() => ICONS[settings.theme]);
         {{ t('search.placeholder') }}
       </span>
     </button>
+    <div class="btns">
+      <q-btn
+        flat
+        round
+        dense
+        class="wx-icon-btn"
+        :icon="locationBlocked ? 'mdi-crosshairs-off' : 'mdi-crosshairs-gps'"
+        :loading="locating"
+        :aria-label="t('location.use')"
+        @click="emit('locate')"
+      />
 
-    <q-btn
-      flat
-      round
-      dense
-      class="wx-icon-btn"
-      :icon="locationBlocked ? 'mdi-crosshairs-off' : 'mdi-crosshairs-gps'"
-      :loading="locating"
-      :aria-label="t('location.use')"
-      @click="emit('locate')"
-    />
-
-    <q-btn
-      flat
-      round
-      dense
-      class="wx-icon-btn"
-      icon="mdi-refresh"
-      :loading="weather.status === 'refreshing'"
-      :disable="!weather.target"
-      :aria-label="t('common.refresh')"
-      @click="weather.refresh()"
-    />
-    <q-btn
-      flat
-      round
-      dense
-      class="wx-icon-btn"
-      :icon="themeIcon"
-      :aria-label="t(`theme.${settings.theme}`)"
-      @click="settings.cycleTheme()"
-    />
+      <q-btn
+        flat
+        round
+        dense
+        class="wx-icon-btn"
+        icon="mdi-refresh"
+        :loading="weather.status === 'refreshing'"
+        :disable="!weather.target"
+        :aria-label="t('common.refresh')"
+        @click="weather.refresh()"
+      />
+      <q-btn
+        flat
+        round
+        dense
+        class="wx-icon-btn"
+        :icon="themeIcon"
+        :aria-label="t(`theme.${settings.theme}`)"
+        @click="settings.cycleTheme()"
+      />
+    </div>
   </header>
 </template>
 
@@ -74,18 +75,24 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 .topbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   padding: 12px 0 4px;
 }
 
+.btns {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+}
+
 .pill {
   display: flex;
-  flex: 1;
   align-items: center;
   gap: 8px;
   height: 40px;
   padding: 0 14px;
-  border-radius: 999px;
+  border-radius: 1000px;
   color: var(--text-muted);
   font: inherit;
   font-size: 15px;
