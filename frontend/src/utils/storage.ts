@@ -14,6 +14,14 @@ export const storage = {
     }
   },
 
+  getRaw(key: string): unknown {
+    try {
+      return LocalStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  },
+
   set(key: string, value: unknown): void {
     try {
       LocalStorage.set(key, value);
