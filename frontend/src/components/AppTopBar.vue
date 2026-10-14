@@ -91,12 +91,17 @@ const themeIcon = computed(() => ICONS[settings.theme]);
   align-items: center;
   gap: 8px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 15px;
   border-radius: 1000px;
   color: var(--text-muted);
   font: inherit;
   font-size: 15px;
   text-align: left;
   cursor: pointer;
+  transition: filter 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
 }
 </style>

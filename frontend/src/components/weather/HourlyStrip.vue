@@ -47,7 +47,11 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
     class="hourly-strip wx-card"
     :aria-label="t('weather.hourly')"
   >
-    <div class="hourly-scroll">
+    <div
+      class="hourly-scroll"
+      data-no-swipe
+      @touchstart.stop
+    >
       <div
         v-for="(s, i) in slots"
         :key="s.key"
@@ -76,13 +80,17 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
   gap: 5px;
   padding: 15px 13px;
   overflow-x: auto;
-  scrollbar-width: none;
-  justify-content: center;
-
-  scroll-snap-type: x mandatory;
 
   &::-webkit-scrollbar {
     display: none;
+    scrollbar-width: none;
+  }
+
+  justify-content: flex-start;
+  scroll-snap-type: x mandatory;
+
+  @media (min-width: 641px) {
+    justify-content: center;
   }
 }
 

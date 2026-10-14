@@ -80,41 +80,41 @@ $scenes-dark: (
 }
 
 body.body--light {
-  --text: #1f2a37;
-  --text-muted: #626f80;
-  --text-faint: #69707a;
-  --surface: rgba(255, 255, 255, 0.6);
-  --surface-border: rgba(255, 255, 255, 0.75);
-  --sheet: rgba(255, 255, 255, 1);
-  --divider: rgba(31, 42, 55, 0.3);
+  --text: #17212d;
+  --text-muted: #353c47;
+  --text-faint: #4b4f57;
+  --surface: rgba(239, 244, 246, 0.5);
+  --surface-border: rgba(247, 247, 247, 0.7);
+  --sheet: rgb(235, 239, 242);
+  --divider: rgba(132, 146, 161, 0.3);
   --shadow: 0 1px 2px rgba(31, 42, 55, 0.05), 0 8px 24px rgba(31, 42, 55, 0.05);
   --bar-track: rgba(31, 42, 55, 0.07);
-  --bar-from: #8ec5fc;
+  --bar-from: #6bb5ff;
   --bar-to: #f6c28b;
   --sky-top: #d9eafb;
   --sky-bottom: #f6faff;
-  --tone-sun: #f5c25a;
-  --tone-moon: #9aa8d6;
-  --tone-cloud: #9fb0c6;
-  --tone-rain: #7aa5d6;
-  --tone-storm: #9b8fd0;
-  --tone-snow: #8fc1e0;
-  --tone-mist: #a9b4bd;
+  --tone-sun: rgb(242, 173, 35);
+  --tone-moon: #3c57af;
+  --tone-cloud: #4c6fa4;
+  --tone-rain: #2f79cd;
+  --tone-storm: #887eb7;
+  --tone-snow: #79a4bf;
+  --tone-mist: #919ba2;
   background: #f6faff;
   --heart: #e8909f;
 }
 
 body.body--dark {
   --text: #e8edf3;
-  --text-muted: #a0aebe;
-  --text-faint: #8c9cae;
-  --surface: rgba(255, 255, 255, 0.05);
+  --text-muted: #b8c7da;
+  --text-faint: #a5b6ca;
+  --surface: rgba(238, 241, 245, 0.05);
   --surface-border: rgba(255, 255, 255, 0.07);
   --sheet: rgb(30, 38, 48);
-  --divider: rgba(255, 255, 255, 0.3);
+  --divider: rgba(82, 82, 82, 0.3);
   --shadow: none;
   --bar-track: rgba(255, 255, 255, 0.1);
-  --bar-from: #6fa8dc;
+  --bar-from: #589cdb;
   --bar-to: #d9a46c;
   --sky-top: #1f2f45;
   --sky-bottom: #141b27;

@@ -163,16 +163,30 @@ function onLocate() {
 }
 
 .body {
-  flex: 1;
-  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  min-height: 100px;
   overflow-y: auto;
   padding: 8px 0 16px;
 }
 
 .sheet-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  li {
+    width: 100%;
+  }
+}
+
+.body > .place {
+  width: 95%;
 }
 
 .skeleton {
@@ -187,8 +201,9 @@ function onLocate() {
   align-items: center;
   gap: 14px;
   width: 100%;
-  padding: 12px 20px;
+  padding: 8px 20px;
   border: 0;
+  border-radius: 25px;
   background: transparent;
   color: inherit;
   font: inherit;
