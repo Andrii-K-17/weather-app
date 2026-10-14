@@ -11,10 +11,17 @@ import {
 } from '@/utils/favorites';
 import { storage } from '@/utils/storage';
 
-const FAVORITES_KEY = 'wx:v1:favorites';
+const FAVORITES_KEY = 'wx:favorites';
+const LEGACY_FAVORITES_KEY = 'wx:v1:favorites';
 
 export const useCitiesStore = defineStore('cities', () => {
-  const items = ref<FavoriteCity[]>(parseFavorites(storage.getRaw(FAVORITES_KEY)));
+  const storedItems = storage.getRaw(FAVORITES_KEY);
+  const legacyItems = storage.getRaw(LEGACY_FAVORITES_KEY);
+  const items = ref<FavoriteCity[]>(parseFavorites(storedItems ?? legacyItems));
+
+  if (storedItems == null && legacyItems != null) {
+    storage.set(FAVORITES_KEY, items.value);
+  }
 
   const isFull = computed(() => items.value.length >= MAX_FAVORITES);
 

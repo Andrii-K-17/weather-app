@@ -31,9 +31,14 @@ export function makeFavorite(input: {
 
 /** Safely parses and validates the favorite cities list from an untrusted source. */
 export function parseFavorites(raw: unknown): FavoriteCity[] {
-  if (typeof raw !== 'object' || raw === null) return [];
-  const { version, items } = raw as { version?: unknown; items?: unknown };
-  if (version !== 1 || !Array.isArray(items)) return [];
+  let items: unknown;
+  if (Array.isArray(raw)) {
+    items = raw;
+  } else if (typeof raw === 'object' && raw !== null) {
+    const stored = raw as { items?: unknown };
+    items = stored.items;
+  }
+  if (!Array.isArray(items)) return [];
 
   const out: FavoriteCity[] = [];
   const seen = new Set<string>();
