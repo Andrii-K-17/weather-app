@@ -1,5 +1,5 @@
 import { useI18n } from 'vue-i18n';
-import { formatClock, formatHourLocal, formatWeekday } from '@/utils/format';
+import { formatClock, formatHourLocal, formatTimeLocal, formatWeekday } from '@/utils/format';
 
 /** Locale-aware formatters bound to the current UI language. */
 export function useFormatters() {
@@ -13,5 +13,6 @@ export function useFormatters() {
       new Intl.NumberFormat(locale.value, {
         maximumFractionDigits: maxFractionDigits,
       }).format(value),
+    time: (unix: number, offsetSec: number) => formatTimeLocal(unix, offsetSec, locale.value),
   };
 }

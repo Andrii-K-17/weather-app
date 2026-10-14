@@ -21,6 +21,7 @@ import { useCityPager } from '@/composables/useCityPager';
 import { cityId } from '@/utils/cityId';
 import { useKeyboardNav } from '@/composables/useKeyboardNav';
 import CityDots from '@/components/CityDots.vue';
+import CitiesSheet from '@/components/CitiesSheet.vue';
 
 const vTouchSwipe = TouchSwipe;
 
@@ -39,6 +40,7 @@ const { pages, activeIndex, isTemporaryFirst, direction, go, goTo, resetDirectio
   useCityPager();
 
 const searchOpen = ref(false);
+const citiesOpen = ref(false);
 
 const showSkeleton = computed(() => !overview.value && status.value !== 'error');
 const showDots = computed(() => pages.value.length > 1 && activeIndex.value >= 0);
@@ -128,6 +130,7 @@ async function onRefresh(done: () => void) {
           :location-blocked="permission === 'denied'"
           @search="searchOpen = true"
           @locate="onLocate"
+          @cities="citiesOpen = true"
         />
 
         <CityDots
@@ -180,6 +183,10 @@ async function onRefresh(done: () => void) {
       v-model="searchOpen"
       @pick="onPick"
       @locate="onLocate"
+    />
+    <CitiesSheet
+      v-model="citiesOpen"
+      @search="searchOpen = true"
     />
   </q-page>
 </template>

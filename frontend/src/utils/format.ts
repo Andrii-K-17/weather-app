@@ -37,3 +37,12 @@ export function formatClock(date: Date, locale: string): string {
     minute: '2-digit',
   }).format(date);
 }
+
+/** City-local time. */
+export function formatTimeLocal(unix: number, offsetSec: number, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'UTC',
+  }).format(shifted(unix, offsetSec));
+}

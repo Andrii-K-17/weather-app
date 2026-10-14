@@ -5,7 +5,7 @@ import { useSettingsStore } from '@/stores/settings';
 import { useWeatherStore } from '@/stores/weather';
 
 defineProps<{ locating?: boolean; locationBlocked?: boolean }>();
-const emit = defineEmits<{ search: []; locate: [] }>();
+const emit = defineEmits<{ search: []; locate: []; cities: [] }>();
 
 const { t } = useI18n();
 const settings = useSettingsStore();
@@ -22,19 +22,31 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 <template>
   <header class="topbar">
-    <button
-      type="button"
-      class="pill wx-card"
-      @click="emit('search')"
-    >
-      <q-icon
-        name="mdi-magnify"
-        size="20px"
+    <div class="btns">
+      <button
+        type="button"
+        class="pill wx-card"
+        @click="emit('search')"
+      >
+        <q-icon
+          name="mdi-magnify"
+          size="20px"
+        />
+        <span>
+          {{ t('search.placeholder') }}
+        </span>
+      </button>
+      <q-btn
+        flat
+        round
+        dense
+        class="wx-icon-btn fav-list-btn"
+        icon="mdi-format-list-bulleted"
+        :aria-label="t('favorites.title')"
+        @click="emit('cities')"
       />
-      <span>
-        {{ t('search.placeholder') }}
-      </span>
-    </button>
+    </div>
+
     <div class="btns">
       <q-btn
         flat
@@ -84,6 +96,10 @@ const themeIcon = computed(() => ICONS[settings.theme]);
   display: flex;
   flex-direction: row;
   gap: 7px;
+}
+
+.fav-list-btn {
+  margin: auto;
 }
 
 .pill {
