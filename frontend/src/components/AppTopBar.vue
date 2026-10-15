@@ -22,10 +22,10 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 <template>
   <header class="topbar">
-    <div class="btns">
+    <div class="btns-l">
       <button
         type="button"
-        class="pill wx-card"
+        class="pill card"
         @click="emit('search')"
       >
         <q-icon
@@ -39,7 +39,6 @@ const themeIcon = computed(() => ICONS[settings.theme]);
       <q-btn
         flat
         round
-        dense
         class="wx-icon-btn fav-list-btn"
         icon="mdi-format-list-bulleted"
         :aria-label="t('favorites.title')"
@@ -47,11 +46,10 @@ const themeIcon = computed(() => ICONS[settings.theme]);
       />
     </div>
 
-    <div class="btns">
+    <div class="btns-r">
       <q-btn
         flat
         round
-        dense
         class="wx-icon-btn"
         :icon="locationBlocked ? 'mdi-crosshairs-off' : 'mdi-crosshairs-gps'"
         :loading="locating"
@@ -62,7 +60,6 @@ const themeIcon = computed(() => ICONS[settings.theme]);
       <q-btn
         flat
         round
-        dense
         class="wx-icon-btn"
         icon="mdi-refresh"
         :loading="weather.status === 'refreshing'"
@@ -73,7 +70,6 @@ const themeIcon = computed(() => ICONS[settings.theme]);
       <q-btn
         flat
         round
-        dense
         class="wx-icon-btn"
         :icon="themeIcon"
         :aria-label="t(`theme.${settings.theme}`)"
@@ -89,24 +85,40 @@ const themeIcon = computed(() => ICONS[settings.theme]);
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 12px 0 4px;
+  padding: 10px 0 4px;
 }
 
-.btns {
+.btns-r {
   display: flex;
   flex-direction: row;
   gap: 7px;
 }
 
+.btns-l {
+  display: flex;
+  flex-direction: row;
+}
+
 .fav-list-btn {
   margin: auto;
+  padding: 0px 15px 0px 12px;
+  background: var(--surface);
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: var(--surface-border);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  transition: background-color 0.2s ease;
+
+  :deep(.q-icon) {
+    font-size: 20px;
+  }
 }
 
 .pill {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 40px;
+  height: 42px;
   padding: 0 15px;
   border-radius: 1000px;
   color: var(--text-muted);
@@ -114,10 +126,25 @@ const themeIcon = computed(() => ICONS[settings.theme]);
   font-size: 15px;
   text-align: left;
   cursor: pointer;
-  transition: filter 0.2s ease;
+  transition: background-color 0.2s ease;
+}
 
-  &:hover {
-    filter: brightness(1.2);
-  }
+.pill:hover,
+.fav-list-btn:hover {
+  background-color: var(--topbar-hover);
+}
+
+.btns-r :deep(.wx-icon-btn) {
+  transition: background-color 0.2s ease;
+}
+
+.btns-r :deep(.wx-icon-btn:hover) {
+  background-color: var(--surface);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 }
 </style>

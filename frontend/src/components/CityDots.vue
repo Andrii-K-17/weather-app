@@ -36,7 +36,7 @@ const { t } = useI18n();
   height: 7px;
   padding: 0;
   border: 0;
-  border-radius: 3px;
+  border-radius: 10px;
   background: var(--text-faint);
   opacity: 0.7;
   cursor: pointer;
@@ -52,7 +52,7 @@ const { t } = useI18n();
   }
 
   &--active {
-    width: 15px;
+    width: 17px;
     opacity: 1;
     background: var(--text-muted);
   }

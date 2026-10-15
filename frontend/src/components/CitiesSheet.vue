@@ -75,7 +75,6 @@ function onAdd() {
         <q-btn
           flat
           rounded
-          dense
           no-caps
           icon="mdi-plus"
           :label="t('favorites.addCity')"
@@ -145,7 +144,6 @@ function onAdd() {
           <q-btn
             flat
             round
-            dense
             size="sm"
             icon="mdi-close"
             class="wx-icon-btn"

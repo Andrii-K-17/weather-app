@@ -84,6 +84,7 @@ body.body--light {
   --text-muted: #353c47;
   --text-faint: #4b4f57;
   --surface: rgba(239, 244, 246, 0.5);
+  --topbar-hover: rgba(221, 221, 221, 0.3);
   --surface-border: rgba(247, 247, 247, 0.7);
   --sheet: rgb(235, 239, 242);
   --divider: rgba(132, 146, 161, 0.3);
@@ -109,6 +110,7 @@ body.body--dark {
   --text-muted: #b8c7da;
   --text-faint: #a5b6ca;
   --surface: rgba(238, 241, 245, 0.05);
+  --topbar-hover: rgba(183, 183, 183, 0.3);
   --surface-border: rgba(255, 255, 255, 0.07);
   --sheet: rgb(30, 38, 48);
   --divider: rgba(82, 82, 82, 0.3);

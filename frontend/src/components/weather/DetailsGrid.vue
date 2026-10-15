@@ -45,8 +45,9 @@ const windArrowStyle = computed(() => ({
       <template #suffix>
         <q-icon
           name="mdi-arrow-up"
-          size="16px"
+          size="17px"
           :style="windArrowStyle"
+          class="arrow-icon"
           aria-hidden="true"
         />
       </template>
@@ -79,5 +80,17 @@ const windArrowStyle = computed(() => ({
   @media (min-width: 480px) {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.arrow-icon {
+  color: var(--bar-from);
+  text-shadow: 0px 0px 1px rgb(22, 109, 167);
+  box-shadow: 0px 0px 1px rgb(123, 130, 134);
+  transition: transform 0.4s ease;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--text-muted);
+  border-radius: 50%;
+  padding: 3px;
 }
 </style>
