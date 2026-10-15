@@ -88,6 +88,7 @@ defineProps<{
   font-size: 24px;
   font-weight: 400;
   font-variant-numeric: tabular-nums;
+  justify-content: space-between;
 }
 
 .detail-tile-meter {

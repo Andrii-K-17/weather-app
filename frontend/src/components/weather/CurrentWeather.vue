@@ -77,7 +77,7 @@ const current = computed(() => props.overview.current);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 20px;
+  padding: 10px 0 5px;
   text-align: center;
 }
 

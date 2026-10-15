@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { Condition, WeatherOverview } from '@/api/types';
+import WeatherChart from '@/components/weather/WeatherChart.vue';
 import WeatherIcon from '@/components/weather/WeatherIcon.vue';
 import { useFormatters } from '@/composables/useFormatters';
 import { roundTemp } from '@/utils/format';
@@ -40,6 +41,7 @@ const slots = computed<Slot[]>(() => {
 });
 
 const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100)}%` : '-');
+const temperatures = computed(() => slots.value.map((slot) => slot.temp));
 </script>
 
 <template>
@@ -52,23 +54,59 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
       data-no-swipe
       @touchstart.stop
     >
-      <div
-        v-for="(s, i) in slots"
-        :key="s.key"
-        class="hourly-item"
-      >
-        <span
-          class="hourly-time"
-          :class="{ 'hourly-time-now': i === 0 }"
+      <div class="hourly-content">
+        <div
+          class="hourly-row"
+          role="list"
         >
-          {{ s.label }}
-        </span>
-        <WeatherIcon
-          :condition="s.condition"
-          size="28px"
-        />
-        <span class="hourly-temp">{{ roundTemp(s.temp) }}°</span>
-        <span class="hourly-pop">{{ popLabel(s.pop) }}</span>
+          <div
+            v-for="(s, i) in slots"
+            :key="s.key"
+            class="hourly-item"
+            role="listitem"
+            :aria-label="`${s.label}, ${roundTemp(s.temp)}°, ${popLabel(s.pop)}`"
+          >
+            <span
+              class="hourly-time"
+              :class="{ 'hourly-time-now': i === 0 }"
+              aria-hidden="true"
+            >
+              {{ s.label }}
+            </span>
+            <WeatherIcon
+              :condition="s.condition"
+              size="28px"
+            />
+          </div>
+        </div>
+
+        <div
+          class="hourly-row hourly-temp-row"
+          aria-hidden="true"
+        >
+          <span
+            v-for="s in slots"
+            :key="s.key"
+            class="hourly-temp"
+          >
+            {{ roundTemp(s.temp) }}°
+          </span>
+        </div>
+
+        <WeatherChart :temperatures="temperatures" />
+
+        <div
+          class="hourly-row hourly-rain-row"
+          aria-hidden="true"
+        >
+          <span
+            v-for="s in slots"
+            :key="s.key"
+            class="hourly-pop"
+          >
+            {{ popLabel(s.pop) }}
+          </span>
+        </div>
       </div>
     </div>
   </section>
@@ -76,8 +114,6 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
 
 <style scoped lang="scss">
 .hourly-scroll {
-  display: flex;
-  gap: 5px;
   padding: 15px 13px;
   overflow-x: auto;
 
@@ -86,12 +122,23 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
     scrollbar-width: none;
   }
 
-  justify-content: flex-start;
   scroll-snap-type: x mandatory;
+}
 
-  @media (min-width: 641px) {
-    justify-content: center;
-  }
+.hourly-temp-row {
+  margin: 10px 0 0 0;
+}
+
+.hourly-content {
+  width: max-content;
+  min-width: 100%;
+  margin-inline: auto;
+}
+
+.hourly-row {
+  display: flex;
+  gap: 5px;
+  width: max-content;
 }
 
 .hourly-item {
@@ -100,6 +147,7 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  scroll-snap-align: start;
 }
 
 .hourly-time {
@@ -112,12 +160,20 @@ const popLabel = (pop: number | null) => (pop !== null ? `${Math.round(pop * 100
   color: var(--text);
 }
 
+.hourly-rain-row {
+  align-items: center;
+}
+
 .hourly-temp {
+  flex: 0 0 60px;
+  text-align: center;
   font-size: 18px;
   font-variant-numeric: tabular-nums;
 }
 
 .hourly-pop {
+  flex: 0 0 60px;
+  text-align: center;
   min-height: 15px;
   font-size: 12px;
   color: var(--tone-rain);

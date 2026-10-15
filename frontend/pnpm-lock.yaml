@@ -11,6 +11,9 @@ importers:
       '@quasar/extras':
         specifier: ^2.1.0
         version: 2.1.0
+      apexcharts:
+        specifier: ^8.2.0
+        version: 8.2.0
       pinia:
         specifier: ^4.0.2
         version: 4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.43(typescript@6.0.3))
@@ -26,6 +29,9 @@ importers:
       vue-router:
         specifier: ^5.0.6
         version: 5.3.1(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.43(typescript@6.0.3)))(rolldown@1.2.12)(vite@8.3.2(@types/node@22.20.5)(jiti@2.7.0)(sass-embedded@1.105.1)(sass@1.105.1)(terser@5.51.2)(yaml@2.9.1))(vue@3.5.43(typescript@6.0.3))
+      vue3-apexcharts:
+        specifier: ^1.11.3
+        version: 1.11.3(apexcharts@8.2.0)(vue@3.5.43(typescript@6.0.3))
     devDependencies:
       '@intlify/unplugin-vue-i18n':
         specifier: ^11.0.0
@@ -1121,6 +1127,13 @@ packages:
 
   alien-signals@3.2.1:
     resolution: {integrity: sha512-I8FjmltrfnDFoZedi5CG8DghVYNhzb/Ijluz7tCSJH0xpd0484Kowhbb1XDYOxfJpU1p5wnM2X54dA+IfGyD1g==}
+
+  apex-commons@0.8.2:
+    resolution: {integrity: sha512-XTaIc8S8YEJ6gjNMvnY2Eq5X8UM2IstpYaVSh7iERBUXIefJ8hjUR2nGhWr9guZuQpFvG9NFca9arhrDdYSgIQ==}
+
+  apexcharts@8.2.0:
+    resolution: {integrity: sha512-SoJgwGOQQ8PWqbhZWA5yQUQUjCnwcDZpVb5NC4d0xeChgRN9UVem5r196s8GtsjvDGrHgq7X5nUoiNu/ZpUMew==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
   asn1js@3.0.10:
     resolution: {integrity: sha512-S2s3aOytiKdFRdulw2qPE51MzjzVOisppcVv7jVFR+Kw0kxwvFrDcYA0h7Ndqbmj0HkMIXYWaoj7fli8kgx1eg==}
@@ -2302,6 +2315,12 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
+  vue3-apexcharts@1.11.3:
+    resolution: {integrity: sha512-YmXi+cslU5XYg3uNF30R3B2MS7TfHsx1bcemi389GipELpzS4jGCs/iZjeXm8R3Brgrlp/ZqOpwemd39AmGWVQ==}
+    peerDependencies:
+      apexcharts: '>=5.10.0'
+      vue: '>=3.0.0'
+
   vue@3.5.43:
     resolution: {integrity: sha512-o5qZoksdnjIKvW1srZ3ab7pcDNYAerBjRe54D0LBLfRdCYFrSgBHVXokMas35czQc0//lmx4/tuY4ZNQ+Rf2Ng==}
     peerDependencies:
@@ -3222,6 +3241,12 @@ snapshots:
       uri-js: 4.4.1
 
   alien-signals@3.2.1: {}
+
+  apex-commons@0.8.2: {}
+
+  apexcharts@8.2.0:
+    dependencies:
+      apex-commons: 0.8.2
 
   asn1js@3.0.10:
     dependencies:
@@ -4333,6 +4358,11 @@ snapshots:
       '@volar/typescript': 2.4.28(typescript@6.0.3)
       '@vue/language-core': 3.3.12
       typescript: 6.0.3
+
+  vue3-apexcharts@1.11.3(apexcharts@8.2.0)(vue@3.5.43(typescript@6.0.3)):
+    dependencies:
+      apexcharts: 8.2.0
+      vue: 3.5.43(typescript@6.0.3)
 
   vue@3.5.43(typescript@6.0.3):
     dependencies:
