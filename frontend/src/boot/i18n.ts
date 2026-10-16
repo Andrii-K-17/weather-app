@@ -26,7 +26,7 @@ declare module 'vue-i18n' {
 export default defineBoot(({ app }) => {
   const settings = useSettingsStore();
 
-  const i18n = createI18n<{ message: MessageSchema }, MessageLanguages>({
+  const i18n = createI18n<{ message: MessageSchema }, MessageLanguages, false>({
     locale: settings.language,
     legacy: false,
     messages,
@@ -39,7 +39,7 @@ export default defineBoot(({ app }) => {
   watch(
     () => settings.language,
     (lang) => {
-      i18n.global.locale = lang;
+      i18n.global.locale.value = lang;
       document.documentElement.lang = lang;
     },
     { immediate: true },

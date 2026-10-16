@@ -1,5 +1,5 @@
 import { useI18n } from 'vue-i18n';
-import { formatClock, formatHourLocal, formatTimeLocal, formatWeekday } from '@/utils/format';
+import { formatClock, formatTimeLocal, formatWeekday } from '@/utils/format';
 
 /** Locale-aware formatters bound to the current UI language. */
 export function useFormatters() {
@@ -7,8 +7,10 @@ export function useFormatters() {
 
   return {
     updatedAt: (iso: string) => formatClock(new Date(iso), locale.value),
-    hour: (unix: number, offsetSec: number) => formatHourLocal(unix, offsetSec, locale.value),
-    weekday: (isoDate: string) => formatWeekday(isoDate, locale.value),
+    weekday: (isoDate: string) => {
+      const res = formatWeekday(isoDate, locale.value);
+      return res.charAt(0).toUpperCase() + res.slice(1);
+    },
     number: (value: number, maxFractionDigits = 0) =>
       new Intl.NumberFormat(locale.value, {
         maximumFractionDigits: maxFractionDigits,

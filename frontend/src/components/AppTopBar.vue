@@ -50,13 +50,21 @@ const themeIcon = computed(() => ICONS[settings.theme]);
       <q-btn
         flat
         round
+        no-caps
+        class="wx-icon-btn lang-btn"
+        :label="t('language.short')"
+        :aria-label="t('language.switch')"
+        @click="settings.toggleLanguage()"
+      />
+      <q-btn
+        flat
+        round
         class="wx-icon-btn"
         :icon="locationBlocked ? 'mdi-crosshairs-off' : 'mdi-crosshairs-gps'"
         :loading="locating"
         :aria-label="t('location.use')"
         @click="emit('locate')"
       />
-
       <q-btn
         flat
         round
@@ -66,15 +74,6 @@ const themeIcon = computed(() => ICONS[settings.theme]);
         :disable="!weather.target"
         :aria-label="t('common.refresh')"
         @click="weather.refresh()"
-      />
-      <q-btn
-        flat
-        round
-        no-caps
-        class="wx-icon-btn lang-btn"
-        :label="t('language.short')"
-        :aria-label="t('language.switch')"
-        @click="settings.toggleLanguage()"
       />
       <q-btn
         flat
@@ -152,7 +151,7 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 }
 
 .btns-r :deep(.lang-btn) {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
 }
 

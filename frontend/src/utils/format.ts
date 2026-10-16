@@ -14,14 +14,6 @@ export function localDate(unix: number, offsetSec: number): string {
   return shifted(unix, offsetSec).toISOString().slice(0, 10);
 }
 
-/** City-local hour. */
-export function formatHourLocal(unix: number, offsetSec: number, locale: string): string {
-  return new Intl.DateTimeFormat(locale, {
-    hour: 'numeric',
-    timeZone: 'UTC',
-  }).format(shifted(unix, offsetSec));
-}
-
 /** Short weekday for a local date string (YYYY-MM-DD). */
 export function formatWeekday(isoDate: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, {
@@ -40,9 +32,10 @@ export function formatClock(date: Date, locale: string): string {
 
 /** City-local time. */
 export function formatTimeLocal(unix: number, offsetSec: number, locale: string): string {
-  return new Intl.DateTimeFormat(locale, {
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZone: 'UTC',
-  }).format(shifted(unix, offsetSec));
+  const options: Intl.DateTimeFormatOptions =
+    locale === 'en-US'
+      ? { hour: 'numeric', hour12: true, timeZone: 'UTC' }
+      : { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'UTC' };
+
+  return new Intl.DateTimeFormat(locale, options).format(shifted(unix, offsetSec));
 }

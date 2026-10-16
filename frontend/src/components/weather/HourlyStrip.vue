@@ -32,7 +32,7 @@ const slots = computed<Slot[]>(() => {
   };
   const next = hourly.map<Slot>((h) => ({
     key: h.time,
-    label: fmt.hour(h.time, location.timezoneOffset),
+    label: fmt.time(h.time, location.timezoneOffset),
     temp: h.temp,
     condition: h.condition,
     pop: h.pop,

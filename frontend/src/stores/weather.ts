@@ -2,7 +2,7 @@ import { computed, ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { ApiError } from '@/api/client';
 import { weatherApi } from '@/api/weather';
-import type { ApiErrorCode, WeatherOverview } from '@/api/types';
+import type { ApiErrorCode, Place, WeatherOverview } from '@/api/types';
 import { useSettingsStore } from '@/stores/settings';
 import { cityId } from '@/utils/cityId';
 import { storage } from '@/utils/storage';
@@ -62,14 +62,18 @@ export const useWeatherStore = defineStore('weather', () => {
   /** Cancels stale requests when the user switches cities quickly. */
   let controller: AbortController | null = null;
 
-  /** cityName returns the resolved name for the current target or overview location. */
+  /**
+   * Prefer the selected place name.
+   * Weather API names can refer to a nearby district.
+  */
   const cityName = computed(() => target.value?.name ?? overview.value?.location.name ?? '');
 
   watch(
-    () => settings.apiLang,
+    () => settings.language,
     () => {
       snapshots.value = {};
       void refresh();
+      if (target.value) void localizeTargetName(target.value, settings.apiLang);
     },
   );
 
@@ -97,6 +101,33 @@ export const useWeatherStore = defineStore('weather', () => {
 
   function remember(next: WeatherTarget, opts: LoadOptions) {
     if (opts.persist !== false) storage.set(LAST_TARGET_KEY, next);
+  }
+
+  async function localizeTargetName(current: WeatherTarget, lang: string) {
+    if (!current.name) return;
+
+    let places: Place[];
+    try {
+      places = await weatherApi.search(current.name, lang);
+    } catch {
+      return;
+    }
+
+    if (target.value !== current || settings.apiLang !== lang || !places.length) return;
+
+    const nearest = places.reduce((best, place) => {
+      const distance =
+        (place.lat - current.lat) ** 2 + (place.lon - current.lon) ** 2;
+      const bestDistance =
+        (best.lat - current.lat) ** 2 + (best.lon - current.lon) ** 2;
+      return distance < bestDistance ? place : best;
+    });
+
+    if (nearest.name === current.name) return;
+
+    const localized = { ...current, name: nearest.name };
+    target.value = localized;
+    remember(localized, {});
   }
 
   /** Fetches weather for a target and cancels any older in-flight request. */
