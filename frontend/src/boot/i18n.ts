@@ -1,7 +1,9 @@
+import { watch } from 'vue';
 import { defineBoot } from '#q-app';
 import { createI18n } from 'vue-i18n';
 
 import messages from '@/i18n';
+import { useSettingsStore } from '@/stores/settings';
 
 export type MessageLanguages = keyof typeof messages;
 // Type-define 'en-US' as the master schema for the resource
@@ -22,12 +24,24 @@ declare module 'vue-i18n' {
 /* eslint-enable @typescript-eslint/no-empty-object-type */
 
 export default defineBoot(({ app }) => {
+  const settings = useSettingsStore();
+
   const i18n = createI18n<{ message: MessageSchema }, MessageLanguages>({
-    locale: 'en-US',
+    locale: settings.language,
     legacy: false,
     messages,
   });
 
   // Set i18n instance on app
   app.use(i18n);
+
+  // Keep vue-i18n and <html lang> in sync with the persisted language
+  watch(
+    () => settings.language,
+    (lang) => {
+      i18n.global.locale = lang;
+      document.documentElement.lang = lang;
+    },
+    { immediate: true },
+  );
 });

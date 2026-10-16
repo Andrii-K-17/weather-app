@@ -70,6 +70,15 @@ const themeIcon = computed(() => ICONS[settings.theme]);
       <q-btn
         flat
         round
+        no-caps
+        class="wx-icon-btn lang-btn"
+        :label="t('language.short')"
+        :aria-label="t('language.switch')"
+        @click="settings.toggleLanguage()"
+      />
+      <q-btn
+        flat
+        round
         class="wx-icon-btn"
         :icon="themeIcon"
         :aria-label="t(`theme.${settings.theme}`)"
@@ -140,6 +149,11 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 .btns-r :deep(.wx-icon-btn:hover) {
   background-color: var(--surface);
+}
+
+.btns-r :deep(.lang-btn) {
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .card {

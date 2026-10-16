@@ -13,6 +13,10 @@ export default {
     light: 'Light theme',
     dark: 'Dark theme',
   },
+  language: {
+    switch: 'Switch language',
+    short: 'EN',
+  },
   search: {
     placeholder: 'Search city',
     useLocation: 'Use my location',

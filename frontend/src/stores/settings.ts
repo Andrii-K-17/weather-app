@@ -46,11 +46,17 @@ export const useSettingsStore = defineStore('settings', () => {
     theme.value = THEME_ORDER[next] ?? 'system';
   }
 
+  /** toggleLanguage switches between the available interface languages. */
+  function toggleLanguage() {
+    language.value = language.value === 'uk' ? 'en-US' : 'uk';
+  }
+
   return {
     theme,
     language,
     apiLang,
     setTheme,
     cycleTheme,
+    toggleLanguage,
   };
 });

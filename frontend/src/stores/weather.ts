@@ -69,6 +69,7 @@ export const useWeatherStore = defineStore('weather', () => {
     () => settings.apiLang,
     () => {
       snapshots.value = {};
+      void refresh();
     },
   );
 
