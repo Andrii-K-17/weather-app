@@ -1,11 +1,13 @@
 import { defineConfig } from '#q-app';
 
 export default defineConfig((ctx) => {
+  const backendUrl = process.env.BACKEND_URL;
+
   return {
     boot: ['pinia', 'i18n'],
 
     htmlVariables: {
-      apiOrigin: process.env.BACKEND_URL ?? '',
+      apiOrigin: backendUrl,
     },
 
     css: ['app.scss'],
@@ -25,6 +27,9 @@ export default defineConfig((ctx) => {
       },
 
       vueRouterMode: 'hash',
+      defineEnv: {
+        BACKEND_URL: backendUrl,
+      },
       // vueRouterBase,
 
       // publicPath: '/',
