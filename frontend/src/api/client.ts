@@ -1,6 +1,6 @@
 import type { ApiErrorCode } from './types';
 
-const API_BASE = '/api/v1';
+const API_BASE = `${import.meta.env.BACKEND_URL ?? ''}/api/v1`;
 const REQUEST_TIMEOUT_MS = 10_000;
 
 const SERVER_CODES: readonly string[] = [

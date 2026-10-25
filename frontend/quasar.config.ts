@@ -4,6 +4,10 @@ export default defineConfig((ctx) => {
   return {
     boot: ['pinia', 'i18n'],
 
+    htmlVariables: {
+      apiOrigin: process.env.BACKEND_URL ?? '',
+    },
+
     css: ['app.scss'],
 
     extras: ['material-icons', 'mdi-v7'],
