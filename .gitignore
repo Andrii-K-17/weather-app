@@ -3,6 +3,7 @@ dist/
 .quasar/
 coverage/
 backend/bin/
+frontend/src-capacitor/www/
 
 .env
 .env.*
