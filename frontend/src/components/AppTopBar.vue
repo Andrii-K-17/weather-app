@@ -31,8 +31,9 @@ const themeIcon = computed(() => ICONS[settings.theme]);
         <q-icon
           name="mdi-magnify"
           size="20px"
+          class="magnify-icon"
         />
-        <span>
+        <span class="gt-xs">
           {{ t('search.placeholder') }}
         </span>
       </button>
@@ -109,7 +110,7 @@ const themeIcon = computed(() => ICONS[settings.theme]);
 
 .fav-list-btn {
   margin: auto;
-  padding: 0px 15px 0px 12px;
+  padding: 0px 12px 0px 12px;
   background: var(--surface);
   border-width: 1px 1px 1px 0;
   border-style: solid;
@@ -135,6 +136,32 @@ const themeIcon = computed(() => ICONS[settings.theme]);
   text-align: left;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  flex: 1;
+  min-width: 0;
+}
+
+.pill span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .btns-l {
+    flex: 0.7;
+    min-width: 0;
+  }
+
+  .btns-l > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .pill {
+    padding: 0px 12px 0px 12px;
+    justify-content: center;
+  }
 }
 
 .pill:hover,
