@@ -23,6 +23,9 @@ out/
 .gradle/
 build/
 
+keystore.properties
+weather-release.jks
+
 # Local configuration file (sdk path, etc)
 local.properties
 
