@@ -2,63 +2,63 @@
 
 $scenes-light: (
   clear: (
-    #91c9f2,
-    #f8d9a5,
+    #a8d9f5,
+    #f7dfbf,
   ),
   night: (
-    #8581c5,
-    #d9b8e6,
+    #a4a2dc,
+    #e4c9e9,
   ),
   clouds: (
-    #a8bacb,
-    #e1e5e9,
+    #bdcbd9,
+    #edf0f2,
   ),
   rain: (
-    #6686a3,
-    #aec4d8,
+    #8eaec7,
+    #c4d5e2,
   ),
   storm: (
-    #51456f,
-    #a18ab6,
+    #786b99,
+    #b4a2c7,
   ),
   snow: (
-    #a7d9e9,
-    #effbff,
+    #b4e0ed,
+    #f4fcff,
   ),
   mist: (
-    #bac5b6,
-    #e8e6d9,
+    #c9d0c1,
+    #efeee4,
   ),
 );
 
 $scenes-dark: (
   clear: (
-    #19466b,
+    #245779,
     #172a40,
   ),
   night: (
-    #30295d,
-    #19172f,
+    #403b76,
+    #1b1a35,
   ),
   clouds: (
-    #354657,
-    #202a35,
+    #40556a,
+    #202b38,
   ),
   rain: (
-    #1b3c57,
-    #122131,
+    #264c69,
+    #142638,
   ),
   storm: (
-    #382950,
-    #1e172b,
+    #49375f,
+    #211a31,
   ),
   snow: (
-    #285364,
-    #192d38,
+    #326477,
+    #1b303c,
   ),
   mist: (
-    #414a40,
-    #272c26,
+    #4d5848,
+    #2a3029,
   ),
 );
 
@@ -74,67 +74,70 @@ $scenes-dark: (
 }
 
 :root {
-  --radius-lg: 28px;
+  --radius-lg: 26px;
   --radius-md: 20px;
-  --radius-sm: 12px;
+  --radius-sm: 14px;
+  color-scheme: light;
 }
 
 body.body--light {
-  --text: #17212d;
-  --text-muted: #353c47;
-  --text-faint: #4b4f57;
-  --surface: rgba(239, 244, 246, 0.1);
-  --topbar-hover: rgba(221, 221, 221, 0.3);
-  --surface-border: rgba(247, 247, 247, 0.2);
-  --sheet: rgb(235, 239, 242);
-  --divider: rgba(132, 146, 161, 0.3);
-  --shadow: 0 1px 2px rgba(31, 42, 55, 0.05), 0 8px 24px rgba(31, 42, 55, 0.05);
-  --home-text-shadow: 0 0 2px rgba(154, 192, 249, 0.5);
-  --home-icon-shadow: 0 0 5px rgba(105, 138, 191, 0.5);
-  --home-chart-shadow: rgba(255, 255, 255, 0.45);
+  --text: #18283a;
+  --text-muted: #42566c;
+  --text-faint: #62768a;
+  --surface: rgba(255, 255, 255, 0.34);
+  --topbar-hover: rgba(255, 255, 255, 0.58);
+  --surface-border: rgba(255, 255, 255, 0.58);
+  --sheet: #f4f7fb;
+  --divider: rgba(72, 96, 120, 0.16);
+  --shadow: 0 2px 6px rgba(31, 54, 77, 0.04), 0 16px 40px rgba(31, 54, 77, 0.1);
+  --home-text-shadow: 0 1px 10px rgba(255, 255, 255, 0.32);
+  --home-icon-shadow: 0 2px 8px rgba(56, 82, 112, 0.18);
+  --home-chart-shadow: rgba(255, 255, 255, 0.68);
   --bar-track: rgba(31, 42, 55, 0.07);
-  --bar-from: #6bb5ff;
-  --bar-to: #f6c28b;
-  --sky-top: #d9eafb;
-  --sky-bottom: #f6faff;
-  --tone-sun: #f2ad23;
-  --tone-moon: #3c57af;
-  --tone-cloud: #4c6fa4;
-  --tone-rain: #2f79cd;
-  --tone-storm: #887eb7;
-  --tone-snow: #79a4bf;
-  --tone-mist: #919ba2;
-  background: #f6faff;
-  --heart: #e8909f;
+  --bar-from: #54a8e8;
+  --bar-to: #efa969;
+  --sky-top: #d8edfb;
+  --sky-bottom: #fbf4eb;
+  --tone-sun: #e99b19;
+  --tone-moon: #5369b7;
+  --tone-cloud: #55769c;
+  --tone-rain: #327bbd;
+  --tone-storm: #7966aa;
+  --tone-snow: #5794b2;
+  --tone-mist: #798995;
+  --heart: #d96682;
+  --sky-glow: rgba(255, 255, 255, 0.4);
+  color-scheme: light;
 }
 
 body.body--dark {
-  --text: #e8edf3;
-  --text-muted: #b8c7da;
-  --text-faint: #a5b6ca;
-  --surface: rgba(238, 241, 245, 0.04);
-  --topbar-hover: rgba(183, 183, 183, 0.3);
-  --surface-border: rgba(255, 255, 255, 0.02);
-  --sheet: rgb(30, 38, 48);
-  --divider: rgba(82, 82, 82, 0.3);
-  --shadow: none;
-  --home-text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-  --home-icon-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-  --home-chart-shadow: rgba(0, 0, 0, 0.35);
-  --bar-track: rgba(255, 255, 255, 0.1);
-  --bar-from: #589cdb;
-  --bar-to: #d9a46c;
-  --sky-top: #1f2f45;
-  --sky-bottom: #141b27;
-  --tone-sun: #f5d15d;
-  --tone-moon: #b3bfe8;
-  --tone-cloud: #8ea0b8;
-  --tone-rain: #78a6dc;
-  --tone-storm: #a99be0;
-  --tone-snow: #9cccea;
-  --tone-mist: #98a4af;
-  background: #141b27;
-  --heart: #ec9bab;
+  --text: #f0f5fc;
+  --text-muted: #c0cee0;
+  --text-faint: #9eafc5;
+  --surface: rgba(237, 243, 252, 0.075);
+  --topbar-hover: rgba(237, 243, 252, 0.14);
+  --surface-border: rgba(237, 243, 252, 0.12);
+  --sheet: #202b3b;
+  --divider: rgba(197, 213, 232, 0.14);
+  --shadow: 0 2px 8px rgba(3, 10, 20, 0.12), 0 18px 44px rgba(3, 10, 20, 0.2);
+  --home-text-shadow: 0 1px 8px rgba(4, 11, 22, 0.22);
+  --home-icon-shadow: 0 2px 8px rgba(4, 11, 22, 0.24);
+  --home-chart-shadow: rgba(4, 11, 22, 0.45);
+  --bar-track: rgba(255, 255, 255, 0.12);
+  --bar-from: #68afe8;
+  --bar-to: #e6aa70;
+  --sky-top: #233951;
+  --sky-bottom: #141c2a;
+  --tone-sun: #ffd16b;
+  --tone-moon: #c0cafa;
+  --tone-cloud: #afc1d8;
+  --tone-rain: #84baf0;
+  --tone-storm: #c0b1ef;
+  --tone-snow: #acd9ef;
+  --tone-mist: #aab8c3;
+  --heart: #f18da6;
+  --sky-glow: rgba(191, 213, 255, 0.08);
+  color-scheme: dark;
 }
 
 @each $name, $pair in $scenes-light {
@@ -155,10 +158,25 @@ body {
   color: var(--text);
   font-family: 'Outfit', sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  color: #17283a;
+  background: rgba(132, 194, 239, 0.4);
+}
+
+body.body--dark ::selection {
+  color: #17283a;
+  background: rgba(168, 213, 255, 0.82);
 }
 
 .app-sky {
-  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom));
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at 15% 0%, var(--sky-glow), transparent 43%),
+    linear-gradient(155deg, var(--sky-top) 0%, var(--sky-bottom) 83%);
   transition:
     --sky-top 0.8s ease,
     --sky-bottom 0.8s ease;
@@ -166,9 +184,9 @@ body {
 
 .wx-container {
   width: 100%;
-  max-width: 630px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: calc(8px + env(safe-area-inset-top, 0px)) 16px 20px;
+  padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 28px;
 }
 
 .wx-home-effects {
@@ -191,8 +209,8 @@ body {
 
 @media (max-width: 599px) {
   .wx-container {
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    padding: calc(8px + env(safe-area-inset-top, 0px)) 16px
+      calc(16px + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -201,8 +219,8 @@ body {
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px) saturate(1.1);
-  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  backdrop-filter: blur(22px) saturate(1.25);
+  -webkit-backdrop-filter: blur(22px) saturate(1.25);
 }
 
 .wx-muted {
@@ -210,8 +228,8 @@ body {
 }
 
 .wx-label {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -227,6 +245,14 @@ body {
 
 .wx-icon-btn {
   color: var(--text-muted);
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.wx-icon-btn:active {
+  transform: scale(0.94);
 }
 
 .q-dialog-backdrop {
