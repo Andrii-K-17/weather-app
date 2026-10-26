@@ -1,0 +1,9 @@
+{
+  "params": {
+    "include": ["capacitor"],
+    "icon": "design/icon.png",
+    "themeColor": "8FB4E8",
+    "pngColor": "8FB4E8",
+    "padding": ["10%", "10%"]
+  }
+}

@@ -1,13 +1,23 @@
 import { defineConfig } from '#q-app';
+import { existsSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const rootEnvPath = resolve(dirname(fileURLToPath(import.meta.url)), '../.env');
+
+if (existsSync(rootEnvPath)) {
+  process.loadEnvFile(rootEnvPath);
+}
 
 export default defineConfig((ctx) => {
   const backendUrl = process.env.BACKEND_URL;
+  const apiOrigin = backendUrl ? new URL(backendUrl).origin : undefined;
 
   return {
     boot: ['pinia', 'i18n'],
 
     htmlVariables: {
-      apiOrigin: backendUrl,
+      apiOrigin,
     },
 
     css: ['app.scss'],

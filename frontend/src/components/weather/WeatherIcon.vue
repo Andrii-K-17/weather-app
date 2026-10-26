@@ -16,6 +16,7 @@ const visual = computed(() =>
   <q-icon
     :name="visual.icon"
     :size="size"
+    :class="`weather-icon--${visual.tone}`"
     :style="{ color: `var(--tone-${visual.tone})` }"
     aria-hidden="true"
   />

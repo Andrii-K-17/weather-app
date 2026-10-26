@@ -123,7 +123,7 @@ async function onRefresh(done: () => void) {
     >
       <div
         v-touch-swipe.horizontal="onSwipe"
-        class="wx-container page"
+        class="wx-container wx-home-effects page"
       >
         <AppTopBar
           :locating="locating"

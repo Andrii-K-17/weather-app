@@ -1,0 +1,8 @@
+{
+  "params": {
+    "include": ["spa"],
+    "icon": "design/icon-web.png",
+    "themeColor": "8FB4E8",
+    "pngColor": "8FB4E8"
+  }
+}

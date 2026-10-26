@@ -83,18 +83,21 @@ body.body--light {
   --text: #17212d;
   --text-muted: #353c47;
   --text-faint: #4b4f57;
-  --surface: rgba(239, 244, 246, 0.5);
+  --surface: rgba(239, 244, 246, 0.1);
   --topbar-hover: rgba(221, 221, 221, 0.3);
-  --surface-border: rgba(247, 247, 247, 0.7);
+  --surface-border: rgba(247, 247, 247, 0.2);
   --sheet: rgb(235, 239, 242);
   --divider: rgba(132, 146, 161, 0.3);
   --shadow: 0 1px 2px rgba(31, 42, 55, 0.05), 0 8px 24px rgba(31, 42, 55, 0.05);
+  --home-text-shadow: 0 0 2px rgba(154, 192, 249, 0.5);
+  --home-icon-shadow: 0 0 5px rgba(105, 138, 191, 0.5);
+  --home-chart-shadow: rgba(255, 255, 255, 0.45);
   --bar-track: rgba(31, 42, 55, 0.07);
   --bar-from: #6bb5ff;
   --bar-to: #f6c28b;
   --sky-top: #d9eafb;
   --sky-bottom: #f6faff;
-  --tone-sun: rgb(242, 173, 35);
+  --tone-sun: #f2ad23;
   --tone-moon: #3c57af;
   --tone-cloud: #4c6fa4;
   --tone-rain: #2f79cd;
@@ -109,18 +112,21 @@ body.body--dark {
   --text: #e8edf3;
   --text-muted: #b8c7da;
   --text-faint: #a5b6ca;
-  --surface: rgba(238, 241, 245, 0.05);
+  --surface: rgba(238, 241, 245, 0.04);
   --topbar-hover: rgba(183, 183, 183, 0.3);
-  --surface-border: rgba(255, 255, 255, 0.07);
+  --surface-border: rgba(255, 255, 255, 0.02);
   --sheet: rgb(30, 38, 48);
   --divider: rgba(82, 82, 82, 0.3);
   --shadow: none;
+  --home-text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  --home-icon-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  --home-chart-shadow: rgba(0, 0, 0, 0.35);
   --bar-track: rgba(255, 255, 255, 0.1);
   --bar-from: #589cdb;
   --bar-to: #d9a46c;
   --sky-top: #1f2f45;
   --sky-bottom: #141b27;
-  --tone-sun: #f2c15d;
+  --tone-sun: #f5d15d;
   --tone-moon: #b3bfe8;
   --tone-cloud: #8ea0b8;
   --tone-rain: #78a6dc;
@@ -165,9 +171,23 @@ body {
   padding: calc(8px + env(safe-area-inset-top, 0px)) 16px 20px;
 }
 
+.wx-home-effects {
+  text-shadow: var(--home-text-shadow);
+}
+
+.wx-home-effects .q-icon {
+  filter: drop-shadow(var(--home-icon-shadow));
+}
+
+.wx-home-effects .apexcharts-line,
+.wx-home-effects .apexcharts-marker {
+  filter: drop-shadow(0 0 2px var(--home-chart-shadow));
+}
+
 @media (max-width: 599px) {
   .wx-container {
     padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   }
 }
 
