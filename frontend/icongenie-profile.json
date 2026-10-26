@@ -2,7 +2,7 @@
   "params": {
     "include": ["spa"],
     "icon": "design/icon-web.png",
-    "themeColor": "8FB4E8",
-    "pngColor": "8FB4E8"
+    "themeColor": "5F93FF",
+    "pngColor": "5F93FF"
   }
 }

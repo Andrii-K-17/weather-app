@@ -179,6 +179,11 @@ body {
   filter: drop-shadow(var(--home-icon-shadow));
 }
 
+.drop-fill .q-icon {
+  filter: none;
+  text-shadow: none;
+}
+
 .wx-home-effects .apexcharts-line,
 .wx-home-effects .apexcharts-marker {
   filter: drop-shadow(0 0 2px var(--home-chart-shadow));
